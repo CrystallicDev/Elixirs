@@ -1,0 +1,31 @@
+modLoader="javafml" # mandatory
+loaderVersion="[40,)" # Forge for 1.18.2 starts at 40.x
+license="MIT"
+# Optional: replace with a real link later
+# issueTrackerURL="https://github.com/yourname/yourmod/issues"
+
+[[mods]]
+modId="elixirs"
+version="1.0.0"
+displayName="Elixirs"
+authors="Natsu91"
+description='''
+A mod that adds lots of new potion effects, to be used
+by other modders / my own mods.
+'''
+
+[[dependencies.elixirs]]
+modId="forge"
+mandatory=true
+versionRange="[40,)" # Forge 40.x = 1.18.2
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.elixirs]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18.2,1.19)"
+ordering="NONE"
+side="BOTH"
+
+

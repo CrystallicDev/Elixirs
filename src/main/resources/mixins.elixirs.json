@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "com.natsu.elixirs.mixins",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"LivingEntityMixin",
+		"BoatMixin"
+	],
+	"client": [],
+	"server": []
+}
