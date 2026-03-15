@@ -33,6 +33,12 @@ public class DamageListener {
 			
 			event.setAmount(event.getAmount() * (1 + (0.1f * level)));
 		}
+		if (entity.hasEffect(ElixirsEffects.ENDURANCE.get())) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.ENDURANCE.get());
+			int level = effect.getAmplifier() + 1;
+			
+			event.setAmount(event.getAmount() * (1 - (0.1f * level)));
+		}
 	}
 	
 	@SubscribeEvent

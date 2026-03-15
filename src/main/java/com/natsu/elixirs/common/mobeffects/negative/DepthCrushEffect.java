@@ -2,6 +2,8 @@ package com.natsu.elixirs.common.mobeffects.negative;
 
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
@@ -16,14 +18,19 @@ public class DepthCrushEffect extends MobEffect {
 	}
 	
 	@Override
-	public void applyEffectTick(LivingEntity entity, int intValue) {
-		
-		entity.setAirSupply(0);
-		
+	public void applyEffectTick(LivingEntity entity, int amplifier) {
+
+	    if (!entity.level.isClientSide) {
+	        if (entity.isEyeInFluid(FluidTags.WATER)) {
+
+	            entity.setAirSupply(0);
+	            entity.hurt(DamageSource.DROWN, 2.0F);
+	        }
+	    }
 	}
-	
+
 	@Override
-	public boolean isDurationEffectTick(int d, int a) {
-		return true;
+	public boolean isDurationEffectTick(int duration, int amplifier) {
+	    return duration % 20 == 0;
 	}
 }

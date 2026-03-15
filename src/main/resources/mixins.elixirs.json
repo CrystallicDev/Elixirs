@@ -1,11 +1,16 @@
 {
-	"required": true,
-	"package": "com.natsu.elixirs.mixins",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-		"LivingEntityMixin",
-		"BoatMixin"
-	],
-	"client": [],
-	"server": []
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.natsu.elixirs.mixins",
+    "refmap": "mixins.elixirs.refmap.json",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "LivingEntityMixin",
+        "BoatMixin"
+    ],
+    "client": [],
+    "server": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }

@@ -24,7 +24,7 @@ public class SpawnListener {
 			if (player.hasEffect(ElixirsEffects.HYPERCHARGED.get())) {
 				if (player.distanceTo(bolt) <= 150) {
 					int r = new Random().nextInt(100);
-					if (r >= (5 * (player.getEffect(ElixirsEffects.HYPERCHARGED.get()).getAmplifier() + 1))) {
+					if (r <= (5 * (player.getEffect(ElixirsEffects.HYPERCHARGED.get()).getAmplifier() + 1))) {
 						bolt.setPos(player.getX(), player.getY(), player.getZ());
 					}
 				}

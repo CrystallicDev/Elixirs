@@ -1,6 +1,7 @@
 package com.natsu.elixirs;
 
 
+import com.llamalad7.mixinextras.MixinExtrasBootstrap;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,6 +15,7 @@ public class Elixirs {
     public Elixirs() {
     	IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
     	ElixirsEffects.EFFECTS.register(modEventBus);
+    	MixinExtrasBootstrap.init();
     }
 
 }

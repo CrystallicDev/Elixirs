@@ -28,4 +28,5 @@ versionRange="[1.18.2,1.19)"
 ordering="NONE"
 side="BOTH"
 
-
+[[mixins]]
+    config="mixins.elixirs.json"

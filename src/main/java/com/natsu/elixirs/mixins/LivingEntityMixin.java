@@ -1,45 +1,39 @@
 package com.natsu.elixirs.mixins;
 
+import javax.annotation.Nullable;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-@Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin {
+@Mixin(value = LivingEntity.class)
+public class LivingEntityMixin {
 
-	@Inject(method = "travel(Lnet/minecraft/world/entity/ai/control/MoveControl$MovementInput;)V", at = @At("HEAD"), cancellable = true)
-	private void adaptFriction(Vec3 travelVector, CallbackInfo cb) {
-		try {
-			LivingEntity entity = (LivingEntity)(Object)this;
-			
-			if (entity.hasEffect(ElixirsEffects.SLIPPERY.get())) {
-				float sliperiness = 0.98F;
-				Vec3 motion = entity.getDeltaMovement();
-				entity.setDeltaMovement(motion.x * sliperiness / 0.6F,
-						motion.y,
-						motion.z * sliperiness / 0.6F);
+	@WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F", remap = false))
+	private float modifyFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity,
+			Operation<Float> original) {
+	        float ans = state.getFriction(level, pos, entity);
+		float baseFriction = state.getFriction(level, pos, entity);
+		if (entity instanceof LivingEntity le) {
+			if (le.hasEffect(ElixirsEffects.FRICTION.get())) {
+				float modifiedFriction = Math.min(0.6f, baseFriction);
+                return modifiedFriction;
 			}
-			
-			if (entity.hasEffect(ElixirsEffects.FRICTION.get())) {
-				float antiSliperiness = 0.5F;
-				Vec3 motion = entity.getDeltaMovement();
-				entity.setDeltaMovement(motion.x * antiSliperiness / 0.6F,
-						motion.y,
-						motion.z * antiSliperiness / 0.6F);
-			}
-		} catch (Exception er) {
-			er.printStackTrace();
-			//Could happen a lot with mixins and mods
 		}
-		
+		return baseFriction;
 	}
-	
-	
 }
