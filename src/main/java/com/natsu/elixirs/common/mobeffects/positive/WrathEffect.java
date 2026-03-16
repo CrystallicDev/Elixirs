@@ -13,7 +13,7 @@ public class WrathEffect extends MobEffect {
 	public static final String WrathAttackModifierUUID = "89dd1b8c-528a-46c0-9435-206da3e55953";
 	
 	public WrathEffect() {
-		super(MobEffectCategory.BENEFICIAL, 0xFFFFFF);
+		super(MobEffectCategory.BENEFICIAL, 0xD10000);
 		
 		this.addAttributeModifier(Attributes.ATTACK_DAMAGE, 
 				WrathAttackModifierUUID, 

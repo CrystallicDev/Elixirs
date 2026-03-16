@@ -4,12 +4,13 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.UseAnim;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(value = Dist.DEDICATED_SERVER)
 public class AphagiaEffectListener {
 
 	@SubscribeEvent

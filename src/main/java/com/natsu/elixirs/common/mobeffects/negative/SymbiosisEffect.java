@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class SymbiosisEffect extends MobEffect {
 
 	public SymbiosisEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0x8AFF9E);
 		
 	}
 }

@@ -2,6 +2,7 @@ package com.natsu.elixirs.common.registry;
 
 import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.mobeffects.negative.AphagiaEffect;
+import com.natsu.elixirs.common.mobeffects.negative.AttractionEffect;
 import com.natsu.elixirs.common.mobeffects.negative.BleedingEffect;
 import com.natsu.elixirs.common.mobeffects.negative.BurnedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.CrumblingEffect;
@@ -11,9 +12,13 @@ import com.natsu.elixirs.common.mobeffects.negative.DepthCrushEffect;
 import com.natsu.elixirs.common.mobeffects.negative.FearEffect;
 import com.natsu.elixirs.common.mobeffects.negative.FrozenEffect;
 import com.natsu.elixirs.common.mobeffects.negative.FrozenSolidEffect;
+import com.natsu.elixirs.common.mobeffects.negative.HeavyEffect;
 import com.natsu.elixirs.common.mobeffects.negative.HyperchargedEffect;
+import com.natsu.elixirs.common.mobeffects.negative.LeechEffect;
+import com.natsu.elixirs.common.mobeffects.negative.RustedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.SmitedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.SymbiosisEffect;
+import com.natsu.elixirs.common.mobeffects.negative.UnstableEffect;
 import com.natsu.elixirs.common.mobeffects.positive.CleansedEffect;
 import com.natsu.elixirs.common.mobeffects.positive.EnduranceEffect;
 import com.natsu.elixirs.common.mobeffects.positive.FrictionEffect;
@@ -74,8 +79,15 @@ public class ElixirsEffects {
 			() -> new FrozenSolidEffect());
 	public static final RegistryObject<MobEffect> SYMBIOSIS = EFFECTS.register("symbiosis", 
 			() -> new SymbiosisEffect());
-	public static final RegistryObject<MobEffect> LEECH = null;
-	public static final RegistryObject<MobEffect> UNSTABLE = null;
-	public static final RegistryObject<MobEffect> RUSTED = null;
+	public static final RegistryObject<MobEffect> HEAVY = EFFECTS.register("heavy", 
+			() -> new HeavyEffect());
+	public static final RegistryObject<MobEffect> ATTRACTION = EFFECTS.register("attraction", 
+			() -> new AttractionEffect());
+	public static final RegistryObject<MobEffect> LEECH = EFFECTS.register("leech", 
+			() -> new LeechEffect());
+	public static final RegistryObject<MobEffect> UNSTABLE = EFFECTS.register("unstable", 
+			() -> new UnstableEffect());
+	public static final RegistryObject<MobEffect> RUSTED = EFFECTS.register("rusted", 
+			() -> new RustedEffect());
 	
 }

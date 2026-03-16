@@ -8,7 +8,7 @@ import net.minecraft.world.phys.Vec3;
 public class SlipperyEffect extends MobEffect {
 
 	public SlipperyEffect() {
-		super(MobEffectCategory.BENEFICIAL, 0x00FFAA);
+		super(MobEffectCategory.BENEFICIAL, 0xA1FFFB);
 	}
 
 

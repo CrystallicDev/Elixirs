@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class DecayEffect extends MobEffect {
 
 	public DecayEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0x3D3737);
 		
 	}
 }

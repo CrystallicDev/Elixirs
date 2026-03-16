@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 public class SmitedEffect extends MobEffect {
 
 	public SmitedEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0xCDFA46);
 	}
 
 	@Override

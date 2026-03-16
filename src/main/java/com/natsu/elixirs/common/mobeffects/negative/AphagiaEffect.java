@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class AphagiaEffect extends MobEffect {
 
 	public AphagiaEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0x5C5C5C);
 		
 	}
 }

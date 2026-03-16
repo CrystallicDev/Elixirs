@@ -5,10 +5,10 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class DeafenedEffect extends MobEffect {
+public class HeavyEffect extends MobEffect {
 
-	public DeafenedEffect() {
-		super(MobEffectCategory.HARMFUL, 0x000000);
+	public HeavyEffect() {
+		super(MobEffectCategory.HARMFUL, 0xB0B0B0);
 		
 	}
 }

@@ -5,10 +5,10 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class DeafenedEffect extends MobEffect {
+public class UnstableEffect extends MobEffect {
 
-	public DeafenedEffect() {
-		super(MobEffectCategory.HARMFUL, 0x000000);
+	public UnstableEffect() {
+		super(MobEffectCategory.HARMFUL, 0x006912);
 		
 	}
 }

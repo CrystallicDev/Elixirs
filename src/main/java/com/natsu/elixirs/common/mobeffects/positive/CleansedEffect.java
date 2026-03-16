@@ -10,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class CleansedEffect extends MobEffect {
 
 	public CleansedEffect() {
-		super(MobEffectCategory.BENEFICIAL, 0xFFFFFF);
+		super(MobEffectCategory.BENEFICIAL, 0x185429);
 	}
 	
 	@Override

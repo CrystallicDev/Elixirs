@@ -9,6 +9,6 @@ import net.minecraft.world.phys.Vec3;
 public class FrictionEffect extends MobEffect {
 
     public FrictionEffect() {
-        super(MobEffectCategory.NEUTRAL, 0x55FFFF);
+        super(MobEffectCategory.NEUTRAL, 0xFACAD3);
     }
 }

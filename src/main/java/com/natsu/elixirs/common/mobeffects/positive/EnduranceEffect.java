@@ -9,7 +9,7 @@ public class EnduranceEffect extends MobEffect {
 
 	
 	public EnduranceEffect() {
-		super(MobEffectCategory.BENEFICIAL, 0xFFFFFF);
+		super(MobEffectCategory.BENEFICIAL, 0x8AB4E3);
 	
 	}
 }

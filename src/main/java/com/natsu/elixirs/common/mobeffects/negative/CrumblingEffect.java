@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class CrumblingEffect extends MobEffect {
 
 	public CrumblingEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0x424C5C);
 		
 	}
 }

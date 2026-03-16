@@ -57,7 +57,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven { url 'https://jitpack.io' } // Required for Mixin Extras
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -69,7 +69,6 @@ dependencies {
     }
 }
 
-// ---- MIXIN REFMAP GENERATION ----
 def refmapName = "mixins.elixirs.refmap.json"
 def refmapFile = file("${buildDir}/tmp/compileJava/${refmapName}")
 

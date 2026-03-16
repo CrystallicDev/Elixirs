@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class FearEffect extends MobEffect {
 
 	public FearEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0x736C6C);
 		
 	}
 }

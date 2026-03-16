@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class HyperchargedEffect extends MobEffect {
 
 	public HyperchargedEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0xF6FF00);
 		
 	}
 }

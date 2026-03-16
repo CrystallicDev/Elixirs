@@ -1,4 +1,4 @@
-package com.natsu.elixirs.server.events;
+package com.natsu.elixirs.client.events;
 
 import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
-public class SoundEffectListener {
+public class SoundListener {
 
     @SubscribeEvent
     public static void onPlaySound(PlaySoundEvent event) {

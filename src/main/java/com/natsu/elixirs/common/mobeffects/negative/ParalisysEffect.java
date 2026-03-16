@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class ParalisysEffect extends MobEffect {
 
 	public ParalisysEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0xFFC67D);
 		
 	}
 }

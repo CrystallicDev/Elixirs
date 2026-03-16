@@ -9,14 +9,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 
-public class FrozenEffect extends MobEffect {
+public class RustedEffect extends MobEffect {
 
-	public static final UUID FrozenMoveSpeedModifierUUID = UUID.fromString("636df67c-ee75-46fb-b508-b2207ec04a69");
-	public static final UUID FrozenDigSpeedModifierUUID = UUID.fromString("049b6bb0-c62d-4460-be11-48fd852ae9ce");
+	public static final UUID RustedMoveSpeedModifierUUID = UUID.fromString("407d5b4f-f9d0-4820-9f5d-fbd5b49bed02");
 	
-	public FrozenEffect() {
-		super(MobEffectCategory.HARMFUL, 0x08EBFF);
+	public RustedEffect() {
+		super(MobEffectCategory.HARMFUL, 0x9E5600);
 	}
 
 	@Override
@@ -25,26 +25,32 @@ public class FrozenEffect extends MobEffect {
         AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
         if(speed == null) return;
 
-        boolean inWater = entity.isInWater();
-
         AttributeModifier modifier = new AttributeModifier(
-        		FrozenMoveSpeedModifierUUID,
-                "water_speed_penalty",
-                -0.2,
+        		RustedMoveSpeedModifierUUID,
+                "armor_move_speed_penalty",
+                -0.15 * getTotalArmorPieces(entity),
                 AttributeModifier.Operation.MULTIPLY_TOTAL
         );
 
-        if(inWater) {
-            if(speed.getModifier(FrozenMoveSpeedModifierUUID) == null) {
-                speed.addTransientModifier(modifier);
-            }
-        } else {
-            if(speed.getModifier(FrozenMoveSpeedModifierUUID) != null) {
-                speed.removeModifier(FrozenMoveSpeedModifierUUID);
-            }
+        if(speed.getModifier(RustedMoveSpeedModifierUUID) == null) {
+            speed.addTransientModifier(modifier);
         }
+        
+        //Yes i know this only applies once, and if the player equips armor AFTER receiving
+        //the effect, it will not count, but it is not an effect intended to be
+        //applied on the player, so its not really important. If you want a consistent slowness effect
+        //you might as well just do -60% by default
 	}
 	
+	private int getTotalArmorPieces(LivingEntity entity) {
+		int count = 0;
+		for (ItemStack stack : entity.getArmorSlots()) {
+			if (stack == null || stack.isEmpty()) continue;
+			count++;
+		}
+		return count;
+	}
+
 	@Override
 	public boolean isDurationEffectTick(int d, int a) {
 		return true;
@@ -60,7 +66,7 @@ public class FrozenEffect extends MobEffect {
         AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
 
         if(speed != null) {
-            speed.removeModifier(FrozenMoveSpeedModifierUUID);
+            speed.removeModifier(RustedMoveSpeedModifierUUID);
         }
     }
 	

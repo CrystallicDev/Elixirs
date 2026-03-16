@@ -14,7 +14,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class DepthCrushEffect extends MobEffect {
 
 	public DepthCrushEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0x04084A);
 	}
 	
 	@Override

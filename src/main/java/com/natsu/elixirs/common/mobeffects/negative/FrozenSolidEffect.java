@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class FrozenSolidEffect extends MobEffect {
 
 	public FrozenSolidEffect() {
-		super(MobEffectCategory.HARMFUL, 0xFFFFFF);
+		super(MobEffectCategory.HARMFUL, 0x08EBFF);
 		
 	}
 }
