@@ -15,32 +15,32 @@ public class ElixirsLangFR extends LanguageProvider{
 	
 	@Override
 	protected void addTranslations() {
-		add(ElixirsEffects.REJUVENATION.get(), "Rejuvenation");
-		add(ElixirsEffects.CLEANSED.get(), "Cleansed");
-		add(ElixirsEffects.WRATH.get(), "Wrath");
+		add(ElixirsEffects.REJUVENATION.get(), "Régénération accélérée");
+		add(ElixirsEffects.CLEANSED.get(), "Purification");
+		add(ElixirsEffects.WRATH.get(), "Rage");
 		add(ElixirsEffects.ENDURANCE.get(), "Endurance");
 		add(ElixirsEffects.FRICTION.get(), "Friction");
-		add(ElixirsEffects.SLIPPERY.get(), "Slippery");
+		add(ElixirsEffects.SLIPPERY.get(), "Friction réduite");
 
-		add(ElixirsEffects.CRUMBLING.get(), "Crumbling");
-		add(ElixirsEffects.HYPERCHARGED.get(), "Hypercharged");
-		add(ElixirsEffects.BURNED.get(), "Burned");
-		add(ElixirsEffects.DEPTH_CRUSH.get(), "Depths Crush");
-		add(ElixirsEffects.FROZEN.get(), "Frozen");
-		add(ElixirsEffects.APHAGIA.get(), "Aphagia");
-		add(ElixirsEffects.FEAR.get(), "Fear");
-		add(ElixirsEffects.DEAFENED.get(), "Deafened");
-		add(ElixirsEffects.BLEEDING.get(), "Bleeding");
-		add(ElixirsEffects.SMITED.get(), "Smited");
-		add(ElixirsEffects.DECAY.get(), "Decay");
-		add(ElixirsEffects.PARALISYS.get(), "Paralisys");
-		add(ElixirsEffects.FROZEN_SOLID.get(), "Frozen Solid");
-		add(ElixirsEffects.SYMBIOSIS.get(), "Symbiosis");
-		add(ElixirsEffects.LEECH.get(), "Leech");
+		add(ElixirsEffects.CRUMBLING.get(), "Effritement");
+		add(ElixirsEffects.HYPERCHARGED.get(), "Hyper chargé");
+		add(ElixirsEffects.BURNED.get(), "Brûlure");
+		add(ElixirsEffects.DEPTH_CRUSH.get(), "Pression des profondeurs");
+		add(ElixirsEffects.FROZEN.get(), "Gelé");
+		add(ElixirsEffects.APHAGIA.get(), "Aphagie");
+		add(ElixirsEffects.FEAR.get(), "Peur");
+		add(ElixirsEffects.DEAFENED.get(), "Assourdissement");
+		add(ElixirsEffects.BLEEDING.get(), "Saignement");
+		add(ElixirsEffects.SMITED.get(), "Châtiment");
+		add(ElixirsEffects.DECAY.get(), "Pourrisement");
+		add(ElixirsEffects.PARALISYS.get(), "Paralysie");
+		add(ElixirsEffects.FROZEN_SOLID.get(), "Gelé sur place");
+		add(ElixirsEffects.SYMBIOSIS.get(), "Symbiose");
+		add(ElixirsEffects.LEECH.get(), "Sangsue");
 		add(ElixirsEffects.ATTRACTION.get(), "Attraction");
-		add(ElixirsEffects.HEAVY.get(), "Heavy");
-		add(ElixirsEffects.UNSTABLE.get(), "Unstable");
-		add(ElixirsEffects.RUSTED.get(), "Rusted");
+		add(ElixirsEffects.HEAVY.get(), "Lourdeur");
+		add(ElixirsEffects.UNSTABLE.get(), "Instabilité");
+		add(ElixirsEffects.RUSTED.get(), "Rouillé");
 	}
 	
 }
