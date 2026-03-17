@@ -16,7 +16,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value = Dist.DEDICATED_SERVER)
+@Mod.EventBusSubscriber
 public class DamageListener {
 
 	@SubscribeEvent
@@ -39,17 +39,13 @@ public class DamageListener {
 			
 			event.setAmount(event.getAmount() * (1 + (0.1f * level)));
 		}
-		if (entity.hasEffect(ElixirsEffects.ENDURANCE.get())) {
-			MobEffectInstance effect = entity.getEffect(ElixirsEffects.ENDURANCE.get());
-			int level = effect.getAmplifier() + 1;
-			
-			event.setAmount(event.getAmount() * (1 - (0.1f * level)));
-		}
+		
 	}
 	
 	@SubscribeEvent
 	public static void onLivingHurt(LivingHurtEvent event) {
 		Entity source = event.getSource().getEntity();
+		LivingEntity entity = event.getEntityLiving();
 		if (source instanceof LivingEntity living) {
 			if (living.hasEffect(ElixirsEffects.FEAR.get())) {
 				event.setCanceled(true);
@@ -70,6 +66,12 @@ public class DamageListener {
 			if (success) {
 				event.getEntityLiving().level.playSound(null, event.getEntityLiving().blockPosition(), SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
 			}
+		}
+		if (entity.hasEffect(ElixirsEffects.ENDURANCE.get())) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.ENDURANCE.get());
+			int level = effect.getAmplifier() + 1;
+			
+			event.setAmount(Math.max(0, event.getAmount() * (1 - (0.1f * level))));
 		}
 		
 	}

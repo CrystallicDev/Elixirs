@@ -13,7 +13,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value = Dist.DEDICATED_SERVER)
+@Mod.EventBusSubscriber
 public class TickListener {
 
 	@SubscribeEvent
@@ -25,7 +25,7 @@ public class TickListener {
 			Level world = entity.getLevel();
 			int dist = 15 + (10 * entity.getEffect(ElixirsEffects.ATTRACTION.get()).getAmplifier());
 			for (Player player : world.players()) {
-				if (player.hasEffect(ElixirsEffects.HYPERCHARGED.get())) {
+				if (player.hasEffect(ElixirsEffects.ATTRACTION.get())) {
 					if (player.distanceTo(entity) <= dist) {
 						lookAt(player, entity);
 					}

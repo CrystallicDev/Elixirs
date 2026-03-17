@@ -11,31 +11,37 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value = Dist.DEDICATED_SERVER)
+@Mod.EventBusSubscriber
 public class StunListener {
 
 	@SubscribeEvent
 	public static void onAttack(AttackEntityEvent event) {
-	    Player player = event.getPlayer();
-		if (player.hasEffect(ElixirsEffects.PARALISYS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-			event.setCanceled(true);
-		}
+	    if (event.isCancelable()) {
+	    	Player player = event.getPlayer();
+			if (player.hasEffect(ElixirsEffects.PARALISYS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+				event.setCanceled(true);
+			}
+	    }
 	}
 	
 	@SubscribeEvent
 	public static void onInteract(PlayerInteractEvent event) {
-	    Player player = event.getPlayer();
-		if (player.hasEffect(ElixirsEffects.PARALISYS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-			event.setCanceled(true);
+		if (event.isCancelable()) {
+			Player player = event.getPlayer();
+			if (player.hasEffect(ElixirsEffects.PARALISYS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+				event.setCanceled(true);
+			}
 		}
 	}
 	
 	@SubscribeEvent
 	public static void onOpenInventory(PlayerContainerEvent event) {
-	    Player player = event.getPlayer();
-		if (player.hasEffect(ElixirsEffects.PARALISYS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-			event.setCanceled(true);
-		}
+	    if (event.isCancelable()) {
+	    	Player player = event.getPlayer();
+			if (player.hasEffect(ElixirsEffects.PARALISYS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+				event.setCanceled(true);
+			}
+	    }
 	}
 	
 	@SubscribeEvent

@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value = Dist.DEDICATED_SERVER)
+@Mod.EventBusSubscriber
 public class RegenerationListener {
 
 	@SubscribeEvent
