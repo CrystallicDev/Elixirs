@@ -64,8 +64,8 @@ public class DamageListener {
 			}
 		}
 
-		if (event.getEntityLiving().hasEffect(ElixirsEffects.LEECH.get())) {
-			int dist = 20 + 10 * event.getEntityLiving().getEffect(ElixirsEffects.LEECH.get()).getAmplifier();
+		if (event.getEntityLiving().hasEffect(ElixirsEffects.UNSTABLE.get())) {
+			int dist = 20 + 10 * event.getEntityLiving().getEffect(ElixirsEffects.UNSTABLE.get()).getAmplifier();
 			boolean success = randomTeleport(event.getEntityLiving(), dist);
 			if (success) {
 				event.getEntityLiving().level.playSound(null, event.getEntityLiving().blockPosition(), SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
