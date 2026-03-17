@@ -14,7 +14,7 @@
 ## Description
 **Elixirs** is a mod that rebalance **vanilla potions**, and brings some **other ones** for mods to use. It is intended to be kind of a utility library mod for modded entities, to avoid having to add your own custom render effects for shaking the player's screen, or making a **"Frozen" visual effect**.
 
-It also does such things as bringing a more legacy-friendly "**Strength**" effect, a nerfed "**Resistance**" effect, some buffs and debuffs inspired by [Terraria](https://store.steampowered.com/app/105600/Terraria/), the [Calamity Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072) and [Lycanite's Mobs](https://www.curseforge.com/minecraft/mc-mods/lycanites-mobs).
+It also does such things as bringing a more legacy-friendly "**Strength**" effect (Wrath), a nerfed "**Resistance**" effect (Endurance), some buffs and debuffs inspired by [Terraria](https://store.steampowered.com/app/105600/Terraria/), the [Calamity Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072) and [Lycanite's Mobs](https://www.curseforge.com/minecraft/mc-mods/lycanites-mobs).
 It does not do much on its own, except adding crafting recipes for uncraftable vanilla potions.
 
 It brings : 
