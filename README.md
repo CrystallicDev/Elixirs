@@ -16,3 +16,8 @@
 
 It also does such things as bringing a more legacy-friendly "**Strength**" effect, a nerfed "**Resistance**" effect, some buffs and debuffs inspired by [Terraria](https://store.steampowered.com/app/105600/Terraria/), the [Calamity Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072) and [Lycanite's Mobs](https://www.curseforge.com/minecraft/mc-mods/lycanites-mobs).
 It does not do much on its own, except adding crafting recipes for uncraftable vanilla potions.
+
+It brings : 
+- Brewing Recipes for Haste, Resistance, Luck, Health Boost, Wither, Blindness, Glowing, Mining Fatigue, Hunger and Dolphin's Grace !
+- New Buffs, like Wrath (+60% damage), Endurance (+10% resistance), Rejuvenation, Friction, Slippery, Cleansed !
+- New Debuffs, like Crumbling, Burned, Hypercharged, Frozen, Depths Crush, Aphagia, Fear, Unstable, Rusted, Deafened, Bleeding, Decay, etc !
