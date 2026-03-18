@@ -2,9 +2,11 @@ package com.natsu.elixirs.server.events;
 
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -41,6 +43,21 @@ public class StunListener {
 			if (player.hasEffect(ElixirsEffects.PARALISYS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
 				event.setCanceled(true);
 			}
+	    }
+	}
+	
+	@SubscribeEvent
+	public static void onEntityTick(LivingEvent.LivingUpdateEvent event) {
+	    LivingEntity living = event.getEntityLiving();
+
+	    if (living.hasEffect(ElixirsEffects.PARALISYS.get()) || living.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+	    	living.setDeltaMovement(0, 0, 0);
+	    	living.teleportTo(living.getX(), living.getY(), living.getZ());
+	    	living.setSprinting(false);
+	    	living.setJumping(false);
+	    } else if (living.hasEffect(ElixirsEffects.HEAVY.get())) {
+	    	living.setDeltaMovement(living.getDeltaMovement().x, living.getDeltaMovement().y > 0 ? 0 : living.getDeltaMovement().y, living.getDeltaMovement().z);
+	    	living.setJumping(false);
 	    }
 	}
 	

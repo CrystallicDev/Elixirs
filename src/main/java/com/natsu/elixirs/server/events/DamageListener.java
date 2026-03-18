@@ -46,17 +46,18 @@ public class DamageListener {
 	public static void onLivingHurt(LivingHurtEvent event) {
 		Entity source = event.getSource().getEntity();
 		LivingEntity entity = event.getEntityLiving();
+		
 		if (source instanceof LivingEntity living) {
 			if (living.hasEffect(ElixirsEffects.FEAR.get())) {
 				event.setCanceled(true);
-			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && event.getEntityLiving().hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().isProjectile()) {
+			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().isProjectile()) {
 				event.setCanceled(true);
 			}
 			
 			if (event.getEntityLiving().hasEffect(ElixirsEffects.LEECH.get())) {
 				//Back in 1.8.9 you'd get an error if you setHealth > getMaxHealth, i dont know if this is still a thing
 				//and i dont want to find out
-				living.setHealth(Math.min(living.getMaxHealth(), living.getHealth() + (event.getAmount() * 0.1f * event.getEntityLiving().getEffect(ElixirsEffects.LEECH.get()).getAmplifier())));
+				living.setHealth(Math.min(living.getMaxHealth(), living.getHealth() + (event.getAmount() * 0.2f * event.getEntityLiving().getEffect(ElixirsEffects.LEECH.get()).getAmplifier())));
 			}
 		}
 
