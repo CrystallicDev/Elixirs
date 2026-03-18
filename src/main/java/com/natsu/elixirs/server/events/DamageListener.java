@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,11 +21,30 @@ import net.minecraftforge.fml.common.Mod;
 public class DamageListener {
 
 	@SubscribeEvent
+	public static void onAttack(LivingAttackEvent event) {
+		LivingEntity entity = event.getEntityLiving();
+		if (entity == null) return; 		// Safe check, there is always weird shit in modded envs
+		Entity source = event.getSource().getEntity();
+		
+		if (source instanceof LivingEntity living) {
+			if (living.hasEffect(ElixirsEffects.FEAR.get())) {
+				event.setCanceled(true);
+			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().isProjectile()) {
+				event.setCanceled(true);
+			}
+			
+			if (event.getEntityLiving().hasEffect(ElixirsEffects.LEECH.get())) {
+				//Back in 1.8.9 you'd get an error if you setHealth > getMaxHealth, i dont know if this is still a thing
+				//and i dont want to find out
+				living.setHealth(Math.min(living.getMaxHealth(), living.getHealth() + (event.getAmount() * 0.2f * event.getEntityLiving().getEffect(ElixirsEffects.LEECH.get()).getAmplifier())));
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		
-		if (entity == null) return; 		// Safe check, there is always weird shit in modded envs
-		
+		if (entity == null) return;
 		if (entity.hasEffect(ElixirsEffects.BURNED.get())) {
 			MobEffectInstance effect = entity.getEffect(ElixirsEffects.BURNED.get());
 			int level = effect.getAmplifier() + 1;
@@ -44,23 +64,8 @@ public class DamageListener {
 	
 	@SubscribeEvent
 	public static void onLivingHurt(LivingHurtEvent event) {
-		Entity source = event.getSource().getEntity();
 		LivingEntity entity = event.getEntityLiving();
-		
-		if (source instanceof LivingEntity living) {
-			if (living.hasEffect(ElixirsEffects.FEAR.get())) {
-				event.setCanceled(true);
-			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().isProjectile()) {
-				event.setCanceled(true);
-			}
-			
-			if (event.getEntityLiving().hasEffect(ElixirsEffects.LEECH.get())) {
-				//Back in 1.8.9 you'd get an error if you setHealth > getMaxHealth, i dont know if this is still a thing
-				//and i dont want to find out
-				living.setHealth(Math.min(living.getMaxHealth(), living.getHealth() + (event.getAmount() * 0.2f * event.getEntityLiving().getEffect(ElixirsEffects.LEECH.get()).getAmplifier())));
-			}
-		}
-
+		if (entity == null) return;
 		if (event.getEntityLiving().hasEffect(ElixirsEffects.UNSTABLE.get())) {
 			int dist = 20 + 10 * event.getEntityLiving().getEffect(ElixirsEffects.UNSTABLE.get()).getAmplifier();
 			boolean success = randomTeleport(event.getEntityLiving(), dist);
