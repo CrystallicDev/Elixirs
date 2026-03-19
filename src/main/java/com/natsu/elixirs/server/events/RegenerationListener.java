@@ -1,5 +1,6 @@
 package com.natsu.elixirs.server.events;
 
+import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.world.effect.MobEffectInstance;
@@ -9,7 +10,7 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = Elixirs.MODID)
 public class RegenerationListener {
 
 	@SubscribeEvent

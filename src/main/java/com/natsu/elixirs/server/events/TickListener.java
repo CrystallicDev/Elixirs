@@ -2,6 +2,7 @@ package com.natsu.elixirs.server.events;
 
 import java.util.Random;
 
+import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.world.entity.Entity;
@@ -13,7 +14,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = Elixirs.MODID)
 public class TickListener {
 
 	@SubscribeEvent

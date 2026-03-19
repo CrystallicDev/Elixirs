@@ -1,5 +1,6 @@
 package com.natsu.elixirs.client.events;
 
+import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.client.Minecraft;
@@ -8,7 +9,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
 public class StunListener {
 
 	@SubscribeEvent

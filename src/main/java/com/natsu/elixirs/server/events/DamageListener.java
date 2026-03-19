@@ -1,5 +1,6 @@
 package com.natsu.elixirs.server.events;
 
+import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.core.BlockPos;
@@ -17,7 +18,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = Elixirs.MODID)
 public class DamageListener {
 
 	@SubscribeEvent

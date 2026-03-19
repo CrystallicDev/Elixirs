@@ -2,7 +2,9 @@ package com.natsu.elixirs.client.render;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.natsu.elixirs.client.render.FrozenSolidHandler.FrozenSolidLayer;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
@@ -27,9 +29,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.entity.vehicle.Minecart;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -39,52 +43,36 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class FrozenLayerRenderEvent {
 
     
 	@SubscribeEvent
-    @SuppressWarnings("unchecked")
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
-        for (String skin : event.getSkins()) {
-            tryAddLayer(event.getSkin(skin));
-        }
-
-        for (EntityType<?> entityType : ForgeRegistries.ENTITIES) {
-        	if (LivingEntity.class.isAssignableFrom(entityType.getBaseClass())) {				//Garbage logic check but works somehow
-        		tryAddLayerForType(event, (EntityType<? extends LivingEntity>) entityType);
-        	}
-        }
-    }
-	
-	private static <T extends LivingEntity> void tryAddLayerForType(EntityRenderersEvent.AddLayers event, EntityType<T> entityType) {
-		tryAddLayer(event.getRenderer(entityType));
-	}
-
-    @SuppressWarnings("unchecked")
-    private static void tryAddLayer(EntityRenderer<?> renderer) {
-        if (renderer == null) return;
-
-        if (renderer instanceof LivingEntityRenderer<?,?> livingRenderer) {
-            if (hasLayer(livingRenderer, FrozenSolidLayer.class)) return;
-
-            ((LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) livingRenderer)
-                .addLayer(new FrozenSolidLayer<>(
-                    (LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) livingRenderer
-                ));
+        List<EntityType<? extends LivingEntity>> entityTypes = ImmutableList.copyOf(
+                ForgeRegistries.ENTITIES.getValues().stream()
+                        .filter(DefaultAttributes::hasSupplier)
+                        .map(entityType -> (EntityType<? extends LivingEntity>) entityType)
+                        .collect(Collectors.toList()));
+        entityTypes.forEach((entityType -> {
+            addLayerIfApplicable(entityType, event);
+        }));
+        for (String skinType : event.getSkins()){
+            event.getSkin(skinType).addLayer(new FrozenSolidHandler.FrozenSolidLayer(event.getSkin(skinType)));
         }
     }
-    
-    private static boolean hasLayer(LivingEntityRenderer<?, ?> renderer, Class<?> layerClass) {
-        try {
-            Field layersField = ObfuscationReflectionHelper.findField(
-                LivingEntityRenderer.class, "f115311"
-            );
-            layersField.setAccessible(true);
-            List<?> layers = (List<?>) layersField.get(renderer);
-            return layers.stream().anyMatch(l -> l.getClass() == layerClass);
-        } catch (Exception e) {
-            return false;
+
+    private static void addLayerIfApplicable(EntityType<? extends LivingEntity> entityType, EntityRenderersEvent.AddLayers event) {
+        LivingEntityRenderer renderer = null;
+        if(entityType != EntityType.ENDER_DRAGON) {
+            try{
+                renderer = event.getRenderer(entityType);
+            } catch (Exception e){
+            	e.printStackTrace();
+            }
+            if(renderer != null){
+                renderer.addLayer(new FrozenSolidHandler.FrozenSolidLayer(renderer));
+            }
         }
     }
 	

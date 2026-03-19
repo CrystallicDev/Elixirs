@@ -16,6 +16,7 @@ import com.natsu.elixirs.common.mobeffects.negative.HeavyEffect;
 import com.natsu.elixirs.common.mobeffects.negative.HyperchargedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.LeechEffect;
 import com.natsu.elixirs.common.mobeffects.negative.RustedEffect;
+import com.natsu.elixirs.common.mobeffects.negative.ShakenEffect;
 import com.natsu.elixirs.common.mobeffects.negative.SmitedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.SymbiosisEffect;
 import com.natsu.elixirs.common.mobeffects.negative.UnstableEffect;
@@ -89,5 +90,7 @@ public class ElixirsEffects {
 			() -> new UnstableEffect());
 	public static final RegistryObject<MobEffect> RUSTED = EFFECTS.register("rusted", 
 			() -> new RustedEffect());
+	public static final RegistryObject<MobEffect> SHAKEN = EFFECTS.register("shaken", 
+			() -> new ShakenEffect());
 	
 }
