@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.client.render.FrozenSolidHandler.FrozenSolidLayer;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
@@ -43,7 +44,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT)
+@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Elixirs.MODID)
 public class FrozenLayerRenderEvent {
 
     
