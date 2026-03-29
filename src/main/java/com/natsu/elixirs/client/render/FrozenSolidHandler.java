@@ -28,10 +28,14 @@ public class FrozenSolidHandler {
 	    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float linbSwingAmount,
 	    		float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 	    	if (entity.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-	    		poseStack.pushPose();
-	    		poseStack.scale(1.02f, 1.02f, 1.02f);		//Desperate attempt at avoiding Z fighting :(
-	    		VertexConsumer vertexBuilder = buffer.getBuffer(RenderType.entityTranslucentCull(FROZEN_OVERLAY));
-	    		this.getParentModel().renderToBuffer(poseStack, vertexBuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.7F);
+	    		try {
+	    			poseStack.pushPose();
+		    		poseStack.scale(1.02f, 1.02f, 1.02f);		//Desperate attempt at avoiding Z fighting :(
+		    		VertexConsumer vertexBuilder = buffer.getBuffer(RenderType.entityTranslucent(FROZEN_OVERLAY));
+		            this.getParentModel().renderToBuffer(poseStack, vertexBuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1F);
+	    		} finally {
+		    		poseStack.popPose();
+	    		}
 	    	}
 	    }
 	}

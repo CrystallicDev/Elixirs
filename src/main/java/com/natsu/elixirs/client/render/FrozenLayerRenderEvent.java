@@ -44,7 +44,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Elixirs.MODID)
+@Mod.EventBusSubscriber(modid = Elixirs.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class FrozenLayerRenderEvent {
 
     
@@ -63,19 +63,20 @@ public class FrozenLayerRenderEvent {
         }
     }
 
-    private static void addLayerIfApplicable(EntityType<? extends LivingEntity> entityType, EntityRenderersEvent.AddLayers event) {
-        LivingEntityRenderer renderer = null;
-        if(entityType != EntityType.ENDER_DRAGON) {
-            try{
-                renderer = event.getRenderer(entityType);
-            } catch (Exception e){
-            	e.printStackTrace();
-            }
-            if(renderer != null){
-                renderer.addLayer(new FrozenSolidHandler.FrozenSolidLayer(renderer));
-            }
-        }
-    }
+	private static void addLayerIfApplicable(EntityType<? extends LivingEntity> entityType, EntityRenderersEvent.AddLayers event) {
+	    if (entityType == EntityType.ENDER_DRAGON) return;
+	    try {
+	        LivingEntityRenderer renderer = event.getRenderer(entityType);
+	        if (renderer != null) {
+	            renderer.addLayer(new FrozenSolidHandler.FrozenSolidLayer(renderer));
+	            System.out.println("Layer added for: "+ForgeRegistries.ENTITIES.getKey(entityType));
+	        } else {
+	        	System.out.println("Null renderer for: "+ForgeRegistries.ENTITIES.getKey(entityType));
+	        }
+	    } catch (Exception e) {
+	    	System.out.println("Exception for: "+ForgeRegistries.ENTITIES.getKey(entityType));
+	    }
+	}
 	
 	/*@SubscribeEvent
     public void onRenderHand(RenderHandEvent event) {
