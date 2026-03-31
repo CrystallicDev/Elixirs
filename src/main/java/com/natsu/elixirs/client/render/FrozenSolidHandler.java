@@ -20,22 +20,28 @@ public class FrozenSolidHandler {
     
 	public static class FrozenSolidLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
 
-	    public FrozenSolidLayer(LivingEntityRenderer<T, M> renderer) {
+	    private LivingEntityRenderer<T, M> renderer;		// WHY is it private in the superclass ???????? Literally whats the point
+
+		public FrozenSolidLayer(LivingEntityRenderer<T, M> renderer) {
 	    	super(renderer);
+	    	this.renderer = renderer;
 	    }
 	    
 	    @Override
 	    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float linbSwingAmount,
 	    		float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 	    	if (entity.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-	    		try {
+	    		/*try {
 	    			poseStack.pushPose();
 		    		poseStack.scale(1.02f, 1.02f, 1.02f);		//Desperate attempt at avoiding Z fighting :(
 		    		VertexConsumer vertexBuilder = buffer.getBuffer(RenderType.entityTranslucent(FROZEN_OVERLAY));
 		            this.getParentModel().renderToBuffer(poseStack, vertexBuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1F);
 	    		} finally {
 		    		poseStack.popPose();
-	    		}
+	    		}*/
+	    		EntityModel model = this.renderer.getModel();
+	    		VertexConsumer vC = buffer.getBuffer(RenderType.entityTranslucentCull(FROZEN_OVERLAY));
+	    		model.renderToBuffer(poseStack, vC, packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 0.8f);
 	    	}
 	    }
 	}

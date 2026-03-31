@@ -28,6 +28,7 @@ import com.natsu.elixirs.common.mobeffects.positive.SlipperyEffect;
 import com.natsu.elixirs.common.mobeffects.positive.WrathEffect;
 
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
