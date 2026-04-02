@@ -22,11 +22,6 @@ public class Elixirs {
     	MixinExtrasBootstrap.init();
     }
     
-    @SubscribeEvent
-    public static void onCommonSetup(FMLCommonSetupEvent event) {
-    	event.enqueueWork(
-    	    	ElixirsPotions::initRecipes
-    			);
-    }
+    
 
 }

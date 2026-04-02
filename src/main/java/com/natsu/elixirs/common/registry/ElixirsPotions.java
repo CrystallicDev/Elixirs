@@ -1,6 +1,7 @@
 package com.natsu.elixirs.common.registry;
 
 import com.natsu.elixirs.Elixirs;
+import com.natsu.elixirs.config.ServerConfig;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -88,139 +89,175 @@ public class ElixirsPotions {
 			() -> new Potion(new MobEffectInstance(MobEffects.HEALTH_BOOST, 45*20, 1)));
 	
 	public static void initRecipes() {
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.HONEYCOMB)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE_LONG.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE_STRONG.get())
-			);
+		if (ServerConfig.USE_HASTE_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.HONEYCOMB)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE_STRONG.get())
+				);
+		}
 		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.NAUTILUS_SHELL)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), RESISTANCE.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), RESISTANCE_LONG.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), RESISTANCE_STRONG.get())
-			);
+		if (ServerConfig.USE_RESISTANCE_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.NAUTILUS_SHELL)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), RESISTANCE.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), RESISTANCE_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), RESISTANCE_STRONG.get())
+				);
+		}
 		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.DRIED_KELP)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), MINING_FATIGUE.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), MINING_FATIGUE_LONG.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), MINING_FATIGUE_STRONG.get())
-			);
+		if (ServerConfig.USE_DOLPHIN_GRACE_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.PRISMARINE_SHARD)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), DOLPHINE_GRACE.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), DOLPHINE_GRACE_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), DOLPHINE_GRACE_STRONG.get())
+				);
+		}
 		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.PRISMARINE_SHARD)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), DOLPHINE_GRACE.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), DOLPHINE_GRACE_LONG.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), DOLPHINE_GRACE_STRONG.get())
-			);
+		if (ServerConfig.USE_MINING_FATIGUE_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.DRIED_KELP)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), MINING_FATIGUE.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), MINING_FATIGUE_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), MINING_FATIGUE_STRONG.get())
+				);
+		}
 		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.SCUTE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), LUCK.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), LUCK_LONG.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), LUCK_STRONG.get())
-			);
+		if (ServerConfig.USE_LUCK_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.SCUTE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), LUCK.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), LUCK_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), LUCK_STRONG.get())
+				);
+		}
 		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.WITHER_ROSE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), WITHER.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), WITHER_LONG.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), WITHER_STRONG.get())
-			);
+		if (ServerConfig.USE_WITHER_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.WITHER_ROSE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), WITHER.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), WITHER_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), WITHER_STRONG.get())
+				);
+		}
 		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.SLIME_BALL)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), BLINDNESS.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), BLINDNESS_LONG.get())
-			);
+		if (ServerConfig.USE_BLINDNESS_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.SLIME_BALL)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), BLINDNESS.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), BLINDNESS_LONG.get())
+				);
+		}
+
+		if (ServerConfig.USE_GLOWING_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.GLOW_INK_SAC)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), GLOWING.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), GLOWING_LONG.get())
+				);	
+		}
+
+		if (ServerConfig.USE_HUNGER_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.SEA_PICKLE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HUNGER.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HUNGER_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HUNGER_STRONG.get())
+				);
+		}
 		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.GLOW_INK_SAC)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), GLOWING.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), GLOWING_LONG.get())
-			);
-		
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
-				Ingredient.of(new ItemStack(Items.NETHERITE_SCRAP)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), HEALTH_BOOST.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.REDSTONE)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), HEALTH_BOOST_LONG.get())
-			);
-		BrewingRecipeRegistry.addRecipe(
-				Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
-				Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), HEALTH_BOOST_STRONG.get())
-			);
+		if (ServerConfig.USE_HEALTH_BOOST_RECIPE.get()) {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+					Ingredient.of(new ItemStack(Items.NETHERITE_SCRAP)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HEALTH_BOOST.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.REDSTONE)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HEALTH_BOOST_LONG.get())
+				);
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), HASTE.get())),
+					Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)),
+					PotionUtils.setPotion(new ItemStack(Items.POTION), HEALTH_BOOST_STRONG.get())
+				);
+		}
 	}
 	
 }
