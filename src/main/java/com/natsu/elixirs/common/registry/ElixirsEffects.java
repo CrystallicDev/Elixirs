@@ -5,6 +5,7 @@ import com.natsu.elixirs.common.mobeffects.negative.AphagiaEffect;
 import com.natsu.elixirs.common.mobeffects.negative.AttractionEffect;
 import com.natsu.elixirs.common.mobeffects.negative.BleedingEffect;
 import com.natsu.elixirs.common.mobeffects.negative.BurnedEffect;
+import com.natsu.elixirs.common.mobeffects.negative.ConfusedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.CrumblingEffect;
 import com.natsu.elixirs.common.mobeffects.negative.DeafenedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.DecayEffect;
@@ -93,5 +94,7 @@ public class ElixirsEffects {
 			() -> new RustedEffect());
 	public static final RegistryObject<MobEffect> SHAKEN = EFFECTS.register("shaken", 
 			() -> new ShakenEffect());
+	public static final RegistryObject<MobEffect> CONFUSED = EFFECTS.register("confused", 
+			() -> new ConfusedEffect());
 	
 }
