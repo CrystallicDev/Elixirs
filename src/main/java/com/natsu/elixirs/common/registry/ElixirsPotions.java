@@ -90,6 +90,7 @@ public class ElixirsPotions {
 			() -> new Potion(new MobEffectInstance(MobEffects.HEALTH_BOOST, 45*20, 1)));
 	
 	public static void initRecipes() {
+		System.out.print("[ELIXIRS] Setting Up Potion Recipe");
 		if (ServerConfig.USE_HASTE_RECIPE.get()) {
 			BrewingRecipeRegistry.addRecipe(
 					NBTIngredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
@@ -109,6 +110,7 @@ public class ElixirsPotions {
 		}
 		
 		if (ServerConfig.USE_RESISTANCE_RECIPE.get()) {
+			
 			BrewingRecipeRegistry.addRecipe(
 					NBTIngredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
 					Ingredient.of(new ItemStack(Items.NAUTILUS_SHELL)),
