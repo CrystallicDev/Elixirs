@@ -23,8 +23,11 @@ It brings :
 - New Buffs, like Wrath (+60% damage), Endurance (+10% resistance), Rejuvenation, Friction, Slippery, Cleansed !
 - New Debuffs, like Crumbling, Burned, Hypercharged, Frozen, Depths Crush, Aphagia, Fear, Unstable, Rusted, Deafened, Bleeding, Decay, etc !
 
-## Availability : 
+## Availability 
 |Loader|Version|
 |--------|--------|
 | Forge | 1.18.2, 1.19.2, 1.20.1 |
 | Neoforge | 1.21.11, 26.1.2, 26.2 |
+
+## Usage 
+Feel free to integrate Elixirs in any of your modpacks, or create new versions of this mod. However, any redistributed version, modified or not, must stay fully free, and keep a link to the original.
