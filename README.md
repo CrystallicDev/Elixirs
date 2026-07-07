@@ -7,6 +7,7 @@
 [![Cristallite](https://img.shields.io/badge/Cristallite-Mod_Collection-darkgreen)](https://google.com)
 [![Modrinth](https://img.shields.io/modrinth/dt/cristallite-elixirs)](https://modrinth.com/mod/cristallite-elixirs)
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/nqtsu91)
 
 > This mod is a member of the **Cristallite Mod Collection**, see Elixirs and my other mods docs / wiki [here](https://google.com).
 
