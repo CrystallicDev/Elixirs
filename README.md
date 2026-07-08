@@ -1,5 +1,6 @@
 <div align="center">
 
+![logo](https://cdn.modrinth.com/data/cached_images/481e1a92a0f35733dc44f38df71df7e16f2bb943.png)
 # Elixirs
 
 [![Forge](https://img.shields.io/badge/Loader-Forge-darkgreen)](https://minecraftforge.net/)
