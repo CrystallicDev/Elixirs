@@ -17,7 +17,7 @@ public class StunListener {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.player == null) return;
 		
-		if (mc.player.hasEffect(ElixirsEffects.PARALISYS.get()) || mc.player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+		if (mc.player.hasEffect(ElixirsEffects.PARALYSIS.get()) || mc.player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
 			mc.options.keyUp.setDown(false);
 			mc.options.keyDown.setDown(false);
 			mc.options.keyLeft.setDown(false);

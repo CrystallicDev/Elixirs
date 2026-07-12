@@ -2,7 +2,9 @@ package com.natsu.elixirs.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class ServerConfig {
+public class ElixirsConfig {
+
+	public static final ForgeConfigSpec SPEC;
 
 	public static final ForgeConfigSpec.BooleanValue USE_HASTE_RECIPE;
 	public static final ForgeConfigSpec.BooleanValue USE_RESISTANCE_RECIPE;
@@ -17,7 +19,7 @@ public class ServerConfig {
 	
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-		builder.push("# Vanilla Potion Recipes");
+		builder.push("vanillaPotionRecipes");
 		USE_HASTE_RECIPE = builder.
 				comment("Allows players to craft Haste potions using Honeycomb")
 				.define("useHasteRecipe", true);
@@ -48,6 +50,8 @@ public class ServerConfig {
 		USE_HUNGER_RECIPE = builder.
 				comment("Allows players to craft Hunger potions using Sea Pickle")
 				.define("useHungerRecipe", true);
+		builder.pop();
+		SPEC = builder.build();
 	}
 	
 }

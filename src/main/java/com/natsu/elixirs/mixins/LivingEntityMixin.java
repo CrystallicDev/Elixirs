@@ -26,13 +26,10 @@ public class LivingEntityMixin {
 	@WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F", remap = false))
 	private float modifyFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity,
 			Operation<Float> original) {
-	        float ans = state.getFriction(level, pos, entity);
-		float baseFriction = state.getFriction(level, pos, entity);
-		if (entity instanceof LivingEntity le) {
-			if (le.hasEffect(ElixirsEffects.FRICTION.get())) {
-				float modifiedFriction = Math.min(0.6f, baseFriction);
-                return modifiedFriction;
-			}
+		// original.call préserve les wraps des autres mods sur getFriction
+		float baseFriction = original.call(state, level, pos, entity);
+		if (entity instanceof LivingEntity le && le.hasEffect(ElixirsEffects.FRICTION.get())) {
+			return Math.min(0.6f, baseFriction);
 		}
 		return baseFriction;
 	}

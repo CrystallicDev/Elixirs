@@ -25,21 +25,23 @@ public class RustedEffect extends MobEffect {
         AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
         if(speed == null) return;
 
-        AttributeModifier modifier = new AttributeModifier(
-        		RustedMoveSpeedModifierUUID,
-                "armor_move_speed_penalty",
-                -0.15 * getTotalArmorPieces(entity),
-                AttributeModifier.Operation.MULTIPLY_TOTAL
-        );
+        // -15% par pièce d'armure. Recalculé chaque tick : le malus suit les
+        // changements d'équipement tant que l'effet est actif.
+        double desired = -0.15 * getTotalArmorPieces(entity);
+        AttributeModifier current = speed.getModifier(RustedMoveSpeedModifierUUID);
 
-        if(speed.getModifier(RustedMoveSpeedModifierUUID) == null) {
-            speed.addTransientModifier(modifier);
+        if (current != null && current.getAmount() == desired) return; // déjà à jour
+
+        if (current != null) {
+            speed.removeModifier(RustedMoveSpeedModifierUUID);
         }
-        
-        //Yes i know this only applies once, and if the player equips armor AFTER receiving
-        //the effect, it will not count, but it is not an effect intended to be
-        //applied on the player, so its not really important. If you want a consistent slowness effect
-        //you might as well just do -60% by default
+        if (desired != 0.0) {
+            speed.addTransientModifier(new AttributeModifier(
+                    RustedMoveSpeedModifierUUID,
+                    "armor_move_speed_penalty",
+                    desired,
+                    AttributeModifier.Operation.MULTIPLY_TOTAL));
+        }
 	}
 	
 	private int getTotalArmorPieces(LivingEntity entity) {

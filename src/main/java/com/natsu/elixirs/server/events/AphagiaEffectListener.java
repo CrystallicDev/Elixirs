@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 public class AphagiaEffectListener {
 
 	@SubscribeEvent
-	public static void onEat(LivingEntityUseItemEvent event) {
+	public static void onEat(LivingEntityUseItemEvent.Start event) {
 		LivingEntity entity = event.getEntityLiving();
 		
 		if (entity == null) return;

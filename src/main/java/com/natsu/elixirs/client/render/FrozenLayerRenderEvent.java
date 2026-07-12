@@ -69,12 +69,9 @@ public class FrozenLayerRenderEvent {
 	        LivingEntityRenderer renderer = event.getRenderer(entityType);
 	        if (renderer != null) {
 	            renderer.addLayer(new FrozenSolidHandler.FrozenSolidLayer(renderer));
-	            System.out.println("Layer added for: "+ForgeRegistries.ENTITIES.getKey(entityType));
-	        } else {
-	        	System.out.println("Null renderer for: "+ForgeRegistries.ENTITIES.getKey(entityType));
 	        }
 	    } catch (Exception e) {
-	    	System.out.println("Exception for: "+ForgeRegistries.ENTITIES.getKey(entityType));
+	        // certains types d'entités n'ont pas de renderer humanoïde : on les ignore
 	    }
 	}
 	

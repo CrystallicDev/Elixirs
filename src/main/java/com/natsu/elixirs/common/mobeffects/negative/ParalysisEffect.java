@@ -5,9 +5,9 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class ParalisysEffect extends MobEffect {
+public class ParalysisEffect extends MobEffect {
 
-	public ParalisysEffect() {
+	public ParalysisEffect() {
 		super(MobEffectCategory.HARMFUL, 0xFFC67D);
 		
 	}

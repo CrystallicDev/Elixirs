@@ -125,3 +125,5 @@ Elixirs adds 20 new debuffs to the game !
 |Unstable|Randomly teleport the player in a small radius on every damage tick|
 |Rusted|Slow down the entity for every armor piece worn|
 |Shaken|Make the player's screen shake|
+
+

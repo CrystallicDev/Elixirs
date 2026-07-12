@@ -25,7 +25,8 @@ public class FrozenEffectListener {
 		if (pl == null) return;
 		
 		if (pl.hasEffect(ElixirsEffects.FROZEN.get()) && pl.isInWaterOrRain()) {
-			event.setNewSpeed(event.getOriginalSpeed() * (1 - (0.2f * pl.getEffect(ElixirsEffects.FROZEN.get()).getAmplifier())));
+			int level = pl.getEffect(ElixirsEffects.FROZEN.get()).getAmplifier() + 1;
+			event.setNewSpeed(Math.max(0, event.getOriginalSpeed() * (1 - (0.2f * level))));
 		}
 	}
 	

@@ -16,6 +16,7 @@ import com.natsu.elixirs.common.mobeffects.negative.FrozenSolidEffect;
 import com.natsu.elixirs.common.mobeffects.negative.HeavyEffect;
 import com.natsu.elixirs.common.mobeffects.negative.HyperchargedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.LeechEffect;
+import com.natsu.elixirs.common.mobeffects.negative.ParalysisEffect;
 import com.natsu.elixirs.common.mobeffects.negative.RustedEffect;
 import com.natsu.elixirs.common.mobeffects.negative.ShakenEffect;
 import com.natsu.elixirs.common.mobeffects.negative.SmitedEffect;
@@ -76,8 +77,8 @@ public class ElixirsEffects {
 			() -> new SmitedEffect());
 	public static final RegistryObject<MobEffect> DECAY = EFFECTS.register("decay", 
 			() -> new DecayEffect());
-	public static final RegistryObject<MobEffect> PARALISYS = EFFECTS.register("paralisys", 
-			() -> new DecayEffect());
+	public static final RegistryObject<MobEffect> PARALYSIS = EFFECTS.register("paralysis",
+			() -> new ParalysisEffect());
 	public static final RegistryObject<MobEffect> FROZEN_SOLID = EFFECTS.register("frozen_solid", 
 			() -> new FrozenSolidEffect());
 	public static final RegistryObject<MobEffect> SYMBIOSIS = EFFECTS.register("symbiosis", 

@@ -33,7 +33,7 @@ public class ElixirsLangFR extends LanguageProvider{
 		add(ElixirsEffects.BLEEDING.get(), "Saignement");
 		add(ElixirsEffects.SMITED.get(), "Châtiment");
 		add(ElixirsEffects.DECAY.get(), "Pourrisement");
-		add(ElixirsEffects.PARALISYS.get(), "Paralysie");
+		add(ElixirsEffects.PARALYSIS.get(), "Paralysie");
 		add(ElixirsEffects.FROZEN_SOLID.get(), "Gelé sur place");
 		add(ElixirsEffects.SYMBIOSIS.get(), "Symbiose");
 		add(ElixirsEffects.LEECH.get(), "Sangsue");
@@ -41,6 +41,26 @@ public class ElixirsLangFR extends LanguageProvider{
 		add(ElixirsEffects.HEAVY.get(), "Lourdeur");
 		add(ElixirsEffects.UNSTABLE.get(), "Instabilité");
 		add(ElixirsEffects.RUSTED.get(), "Rouillé");
+		add(ElixirsEffects.SHAKEN.get(), "Secoué");
+		add(ElixirsEffects.CONFUSED.get(), "Confusion");
+
+		addPotion("haste", "Célérité");
+		addPotion("resistance", "Résistance");
+		addPotion("mining_fatigue", "Fatigue de minage");
+		addPotion("hunger", "Faim");
+		addPotion("dolphin_grace", "Grâce du dauphin");
+		addPotion("luck", "Chance");
+		addPotion("wither", "Flétrissement");
+		addPotion("blindness", "Cécité");
+		addPotion("glowing", "Surbrillance");
+		addPotion("health_boost", "Bonus de santé");
 	}
-	
+
+	private void addPotion(String name, String displayName) {
+		add("item.minecraft.potion.effect." + name, "Potion de " + displayName);
+		add("item.minecraft.splash_potion.effect." + name, "Potion jetable de " + displayName);
+		add("item.minecraft.lingering_potion.effect." + name, "Potion persistante de " + displayName);
+		add("item.minecraft.tipped_arrow.effect." + name, "Flèche de " + displayName);
+	}
+
 }
