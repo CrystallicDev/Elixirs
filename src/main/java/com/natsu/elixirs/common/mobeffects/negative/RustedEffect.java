@@ -25,8 +25,7 @@ public class RustedEffect extends MobEffect {
         AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
         if(speed == null) return;
 
-        // -15% par pièce d'armure. Recalculé chaque tick : le malus suit les
-        // changements d'équipement tant que l'effet est actif.
+        // -15% par pièce d'armure, recalculé chaque tick pour suivre l'équipement
         double desired = -0.15 * getTotalArmorPieces(entity);
         AttributeModifier current = speed.getModifier(RustedMoveSpeedModifierUUID);
 

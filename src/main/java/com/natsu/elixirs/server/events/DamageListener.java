@@ -82,8 +82,7 @@ public class DamageListener {
 	}
 	
 	
-	// même logique que le fruit de chorus : randomTeleport vanilla (position sûre +
-	// sync client des ServerPlayer), son de téléportation au départ et à l'arrivée
+	// téléportation façon fruit de chorus, avec son au départ et à l'arrivée
 	private static void randomTeleport(LivingEntity entity, int radius) {
 	    if (!(entity.level instanceof ServerLevel serverLevel)) return;
 	    double oldX = entity.getX();

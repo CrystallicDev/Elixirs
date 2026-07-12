@@ -113,10 +113,7 @@ public class ElixirsPotions {
 			addPotionChain(Items.NETHERITE_SCRAP, HEALTH_BOOST.get(), HEALTH_BOOST_LONG.get(), HEALTH_BOOST_STRONG.get());
 	}
 
-	/**
-	 * Enregistre la chaîne de brassage standard d'une potion :
-	 * Awkward + ingredient = base, base + Redstone = longue, base + Glowstone = forte.
-	 */
+	// Awkward + ingredient = base, base + Redstone = longue, base + Glowstone = forte
 	private static void addPotionChain(Item ingredient, Potion base, Potion longVariant, Potion strongVariant) {
 		addPotionChain(ingredient, base, longVariant);
 		addBrewingRecipe(base, Items.GLOWSTONE_DUST, strongVariant);

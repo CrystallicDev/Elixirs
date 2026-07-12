@@ -26,7 +26,6 @@ public class TickListener {
 			for (Player player : world.players()) {
 				if (player == entity || player.isSpectator()) continue;
 				if (player.distanceTo(entity) <= dist && player instanceof ServerPlayer serverPlayer) {
-					// force la caméra du client vers l'entité (même mécanisme que /tp facing)
 					serverPlayer.lookAt(EntityAnchorArgument.Anchor.EYES, entity, EntityAnchorArgument.Anchor.EYES);
 				}
 			}

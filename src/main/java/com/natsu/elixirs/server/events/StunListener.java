@@ -76,8 +76,7 @@ public class StunListener {
 	    }
 	}
 
-	// bloque tout mouvement ascendant, et dans l'eau force l'entité à couler
-	// (impossible de nager vers le haut ou de flotter), plus vite à haut niveau
+	// bloque la montée, et fait couler dans l'eau (plus vite à haut niveau)
 	private static void applyHeavy(LivingEntity living) {
 	    Vec3 movement = living.getDeltaMovement();
 	    double dy = movement.y > 0 ? 0 : movement.y;
