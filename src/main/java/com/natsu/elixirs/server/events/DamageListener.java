@@ -23,7 +23,7 @@ public class DamageListener {
 
 	@SubscribeEvent
 	public static void onAttack(LivingAttackEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		if (entity == null) return; 		// Safe check, there is always weird shit in modded envs
 		Entity source = event.getSource().getEntity();
 		
@@ -45,7 +45,7 @@ public class DamageListener {
 	
 	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
 		if (entity.hasEffect(ElixirsEffects.BURNED.get())) {
 			MobEffectInstance effect = entity.getEffect(ElixirsEffects.BURNED.get());
@@ -66,7 +66,7 @@ public class DamageListener {
 	
 	@SubscribeEvent
 	public static void onLivingHurt(LivingHurtEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
 		if (entity.hasEffect(ElixirsEffects.UNSTABLE.get())) {
 			int dist = 20 + 10 * entity.getEffect(ElixirsEffects.UNSTABLE.get()).getAmplifier();

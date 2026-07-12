@@ -8,7 +8,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = Elixirs.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ElixirsDataGenerators {
@@ -22,8 +22,8 @@ public class ElixirsDataGenerators {
         if (event.includeClient()) {
             //gen.addProvider(new CristalliteBlockStateProvider(gen, helper));
             //gen.addProvider(new CristalliteItemModelProvider(gen, helper));
-            gen.addProvider(new ElixirsLangEN(gen));
-            gen.addProvider(new ElixirsLangFR(gen));
+            gen.addProvider(event.includeClient(), new ElixirsLangEN(gen));
+            gen.addProvider(event.includeClient(), new ElixirsLangFR(gen));
         }
 
         if (event.includeServer()) {

@@ -15,7 +15,7 @@ public class RegenerationListener {
 
 	@SubscribeEvent
 	public static void onEntityHeal(LivingHealEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		
 		if (entity == null) return; 		// Safe check, you never now in modded envs
 		

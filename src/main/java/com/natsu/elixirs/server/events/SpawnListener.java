@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 public class SpawnListener {
 
 	@SubscribeEvent
-	public static void onSpawn(EntityJoinWorldEvent event) {
+	public static void onSpawn(EntityJoinLevelEvent event) {
 		if (!(event.getEntity() instanceof LightningBolt bolt)) return;
 
 		Level world = bolt.getLevel();

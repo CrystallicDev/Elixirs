@@ -5,7 +5,7 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ShakenRenderEvent {
 
 	@SubscribeEvent
-	public static void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
+	public static void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
 	    Minecraft mc = Minecraft.getInstance();
 	    if (mc.player == null) return;
 	    if (!mc.player.hasEffect(ElixirsEffects.SHAKEN.get())) return;

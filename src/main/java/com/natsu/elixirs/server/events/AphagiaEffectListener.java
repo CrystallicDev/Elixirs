@@ -16,7 +16,7 @@ public class AphagiaEffectListener {
 
 	@SubscribeEvent
 	public static void onEat(LivingEntityUseItemEvent.Start event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		
 		if (entity == null) return;
 		

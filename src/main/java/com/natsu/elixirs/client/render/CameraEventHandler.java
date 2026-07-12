@@ -8,7 +8,7 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -20,7 +20,7 @@ public class CameraEventHandler {
     private static final Random RANDOM = new Random();
 
     @SubscribeEvent
-    public static void onComputeCameraAngles(EntityViewRenderEvent.CameraSetup event) {
+    public static void onComputeCameraAngles(ViewportEvent.ComputeCameraAngles event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
         if (!mc.player.hasEffect(ElixirsEffects.SHAKEN.get())) return;

@@ -14,8 +14,8 @@ import net.minecraft.client.player.LocalPlayer;
 @Mixin(KeyboardInput.class)
 public class KeyboardInputMixin extends Input {
 
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void onTick(boolean isSneaking, CallbackInfo ci) {
+    @Inject(method = "tick(ZF)V", at = @At("TAIL"))
+    private void onTick(boolean isSneaking, float movementMultiplier, CallbackInfo ci) {
         LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
         if (player == null) return;
         if (!player.hasEffect(ElixirsEffects.CONFUSED.get())) return; 

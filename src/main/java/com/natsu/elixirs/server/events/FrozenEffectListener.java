@@ -21,7 +21,7 @@ public class FrozenEffectListener {
 
 	@SubscribeEvent
 	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
-		Player pl = event.getPlayer();
+		Player pl = event.getEntity();
 		if (pl == null) return;
 		
 		if (pl.hasEffect(ElixirsEffects.FROZEN.get()) && pl.isInWaterOrRain()) {

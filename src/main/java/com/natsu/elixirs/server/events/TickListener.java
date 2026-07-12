@@ -16,8 +16,8 @@ import net.minecraftforge.fml.common.Mod;
 public class TickListener {
 
 	@SubscribeEvent
-	public static void onTick(LivingEvent.LivingUpdateEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+	public static void onTick(LivingEvent.LivingTickEvent event) {
+		LivingEntity entity = event.getEntity();
 		if (entity == null || entity.getLevel().isClientSide()) return;
 
 		if (entity.hasEffect(ElixirsEffects.ATTRACTION.get())) {

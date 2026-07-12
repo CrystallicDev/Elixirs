@@ -21,7 +21,7 @@ public class StunListener {
 	@SubscribeEvent
 	public static void onAttack(AttackEntityEvent event) {
 	    if (event.isCancelable()) {
-	    	Player player = event.getPlayer();
+	    	Player player = event.getEntity();
 			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
 				event.setCanceled(true);
 			}
@@ -31,7 +31,7 @@ public class StunListener {
 	@SubscribeEvent
 	public static void onInteract(PlayerInteractEvent event) {
 		if (event.isCancelable()) {
-			Player player = event.getPlayer();
+			Player player = event.getEntity();
 			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
 				event.setCanceled(true);
 			}
@@ -41,7 +41,7 @@ public class StunListener {
 	@SubscribeEvent
 	public static void onOpenInventory(PlayerContainerEvent event) {
 	    if (event.isCancelable()) {
-	    	Player player = event.getPlayer();
+	    	Player player = event.getEntity();
 			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
 				event.setCanceled(true);
 			}
@@ -49,8 +49,8 @@ public class StunListener {
 	}
 	
 	@SubscribeEvent
-	public static void onEntityTick(LivingEvent.LivingUpdateEvent event) {
-	    LivingEntity living = event.getEntityLiving();
+	public static void onEntityTick(LivingEvent.LivingTickEvent event) {
+	    LivingEntity living = event.getEntity();
 
 	    if (living.hasEffect(ElixirsEffects.PARALYSIS.get()) || living.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
 	    	living.setDeltaMovement(0, 0, 0);

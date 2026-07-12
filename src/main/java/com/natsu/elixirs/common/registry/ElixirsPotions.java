@@ -14,7 +14,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.common.crafting.NBTIngredient;
+import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -126,7 +126,7 @@ public class ElixirsPotions {
 
 	private static void addBrewingRecipe(Potion input, Item ingredient, Potion output) {
 		BrewingRecipeRegistry.addRecipe(
-				NBTIngredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), input)),
+				StrictNBTIngredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), input)),
 				Ingredient.of(ingredient),
 				PotionUtils.setPotion(new ItemStack(Items.POTION), output)
 			);
