@@ -4,13 +4,13 @@ package elixirs.datagen.client.lang;
 import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ElixirsLangFR extends LanguageProvider{
 
-	public ElixirsLangFR(DataGenerator gen) {
-		super(gen, Elixirs.MODID, "fr_fr");
+	public ElixirsLangFR(PackOutput output) {
+		super(output, Elixirs.MODID, "fr_fr");
 	}
 	
 	@Override

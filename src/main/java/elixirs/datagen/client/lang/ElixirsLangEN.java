@@ -4,13 +4,13 @@ import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 import com.natsu.elixirs.common.registry.ElixirsPotions;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ElixirsLangEN extends LanguageProvider{
 
-	public ElixirsLangEN(DataGenerator gen) {
-		super(gen, Elixirs.MODID, "en_us");
+	public ElixirsLangEN(PackOutput output) {
+		super(output, Elixirs.MODID, "en_us");
 	}
 	
 	@Override

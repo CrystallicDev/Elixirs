@@ -30,7 +30,7 @@ public class DamageListener {
 		if (source instanceof LivingEntity living) {
 			if (living.hasEffect(ElixirsEffects.FEAR.get())) {
 				event.setCanceled(true);
-			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().isProjectile()) {
+			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_PROJECTILE)) {
 				event.setCanceled(true);
 			}
 
@@ -51,7 +51,7 @@ public class DamageListener {
 			MobEffectInstance effect = entity.getEffect(ElixirsEffects.BURNED.get());
 			int level = effect.getAmplifier() + 1;
 			
-			if (event.getSource().isFire()) {	//Didnt know mc had a feature like that, it dit not exist in 1.8 !
+			if (event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_FIRE)) {	//Didnt know mc had a feature like that, it dit not exist in 1.8 !
 				event.setAmount(event.getAmount() * (1 + (0.5f * level)));
 			}
 		}

@@ -24,7 +24,7 @@ public class DepthCrushEffect extends MobEffect {
 	        if (entity.isEyeInFluid(FluidTags.WATER)) {
 
 	            entity.setAirSupply(0);
-	            entity.hurt(DamageSource.DROWN, 2.0F);
+	            entity.hurt(entity.damageSources().drown(), 2.0F);
 	        }
 	    }
 	}

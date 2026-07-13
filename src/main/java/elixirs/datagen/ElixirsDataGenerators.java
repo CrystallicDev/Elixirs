@@ -22,8 +22,8 @@ public class ElixirsDataGenerators {
         if (event.includeClient()) {
             //gen.addProvider(new CristalliteBlockStateProvider(gen, helper));
             //gen.addProvider(new CristalliteItemModelProvider(gen, helper));
-            gen.addProvider(event.includeClient(), new ElixirsLangEN(gen));
-            gen.addProvider(event.includeClient(), new ElixirsLangFR(gen));
+            gen.addProvider(event.includeClient(), new ElixirsLangEN(gen.getPackOutput()));
+            gen.addProvider(event.includeClient(), new ElixirsLangFR(gen.getPackOutput()));
         }
 
         if (event.includeServer()) {

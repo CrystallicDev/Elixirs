@@ -1,12 +1,12 @@
 modLoader="javafml" # mandatory
-loaderVersion="[43,)" # Forge for 1.19.2 starts at 43.x
+loaderVersion="[45,)" # Forge for 1.19.4 starts at 45.x
 license="MIT"
 # Optional: replace with a real link later
 # issueTrackerURL="https://github.com/yourname/yourmod/issues"
 
 [[mods]]
 modId="elixirs"
-version="1.0.0"
+version="1.1.0"
 displayName="Elixirs"
 authors="Natsu91"
 description='''
@@ -17,14 +17,14 @@ by other modders / my own mods.
 [[dependencies.elixirs]]
 modId="forge"
 mandatory=true
-versionRange="[43,)" # Forge 43.x = 1.19.2
+versionRange="[45,)" # Forge 45.x = 1.19.4
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.elixirs]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19.2,1.20)"
+versionRange="[1.19.4,1.20)"
 ordering="NONE"
 side="BOTH"
 
