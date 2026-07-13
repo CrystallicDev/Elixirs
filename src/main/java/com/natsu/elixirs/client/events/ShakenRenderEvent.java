@@ -5,11 +5,12 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID)
+@Mod.EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
 public class ShakenRenderEvent {
 
 	@SubscribeEvent
