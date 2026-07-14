@@ -18,10 +18,10 @@ public class TickListener {
 	@SubscribeEvent
 	public static void onTick(LivingEvent.LivingTickEvent event) {
 		LivingEntity entity = event.getEntity();
-		if (entity == null || entity.getLevel().isClientSide()) return;
+		if (entity == null || entity.level().isClientSide()) return;
 
 		if (entity.hasEffect(ElixirsEffects.ATTRACTION.get())) {
-			Level world = entity.getLevel();
+			Level world = entity.level();
 			int dist = 15 + (10 * entity.getEffect(ElixirsEffects.ATTRACTION.get()).getAmplifier());
 			for (Player player : world.players()) {
 				if (player == entity || player.isSpectator()) continue;

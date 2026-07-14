@@ -20,7 +20,7 @@ public class SmitedEffect extends MobEffect {
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int intValue) {
-		Level world = entity.getLevel();
+		Level world = entity.level();
 		if (isSunBurnTick(world, entity) && entity.getRemainingFireTicks() <= 0) {
 			entity.setRemainingFireTicks(50);
 		}
@@ -32,11 +32,11 @@ public class SmitedEffect extends MobEffect {
 	}
 	
 	public static boolean isSunBurnTick(Level level, LivingEntity entity) {
-		if (level.isDay() && !entity.level.isClientSide) {
+		if (level.isDay() && !entity.level().isClientSide) {
 			float f = entity.getLightLevelDependentMagicValue();
 			BlockPos blockpos = BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ());
 			boolean flag = entity.isInWaterRainOrBubble() || entity.isInPowderSnow || entity.wasInPowderSnow;
-			if (f > 0.5F && !flag && entity.level.canSeeSky(blockpos)) {
+			if (f > 0.5F && !flag && entity.level().canSeeSky(blockpos)) {
 				return true;
 			}
 		}

@@ -84,7 +84,7 @@ public class DamageListener {
 	
 	// téléportation façon fruit de chorus, avec son au départ et à l'arrivée
 	private static void randomTeleport(LivingEntity entity, int radius) {
-	    if (!(entity.level instanceof ServerLevel serverLevel)) return;
+	    if (!(entity.level() instanceof ServerLevel serverLevel)) return;
 	    double oldX = entity.getX();
 	    double oldY = entity.getY();
 	    double oldZ = entity.getZ();

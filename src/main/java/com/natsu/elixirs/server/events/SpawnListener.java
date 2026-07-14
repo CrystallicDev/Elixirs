@@ -20,7 +20,7 @@ public class SpawnListener {
 	public static void onSpawn(EntityJoinLevelEvent event) {
 		if (!(event.getEntity() instanceof LightningBolt bolt)) return;
 
-		Level world = bolt.getLevel();
+		Level world = bolt.level();
 		if (world.isClientSide()) return;
 
 		for (Player player : world.players()) {
