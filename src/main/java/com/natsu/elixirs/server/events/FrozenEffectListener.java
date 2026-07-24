@@ -10,13 +10,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID)
+@EventBusSubscriber(modid = Elixirs.MODID)
 public class FrozenEffectListener {
 
 	@SubscribeEvent
@@ -24,8 +24,8 @@ public class FrozenEffectListener {
 		Player pl = event.getEntity();
 		if (pl == null) return;
 		
-		if (pl.hasEffect(ElixirsEffects.FROZEN.get()) && pl.isInWaterOrRain()) {
-			int level = pl.getEffect(ElixirsEffects.FROZEN.get()).getAmplifier() + 1;
+		if (pl.hasEffect(ElixirsEffects.FROZEN) && pl.isInWaterOrRain()) {
+			int level = pl.getEffect(ElixirsEffects.FROZEN).getAmplifier() + 1;
 			event.setNewSpeed(Math.max(0, event.getOriginalSpeed() * (1 - (0.2f * level))));
 		}
 	}

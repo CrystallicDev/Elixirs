@@ -6,19 +6,19 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
 public class SoundListener {
 
     @SubscribeEvent
     public static void onPlaySound(PlaySoundEvent event) {
         Entity entity = Minecraft.getInstance().player;
         if (entity instanceof Player player) {
-            if (player.hasEffect(ElixirsEffects.DEAFENED.get())) {
+            if (player.hasEffect(ElixirsEffects.DEAFENED)) {
                 event.setSound(null);
             }
         }

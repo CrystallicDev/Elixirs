@@ -11,31 +11,30 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID)
+@EventBusSubscriber(modid = Elixirs.MODID)
 public class DamageListener {
 
 	@SubscribeEvent
-	public static void onAttack(LivingAttackEvent event) {
+	public static void onAttack(LivingIncomingDamageEvent event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return; 		// Safe check, there is always weird shit in modded envs
 		Entity source = event.getSource().getEntity();
 		
 		if (source instanceof LivingEntity living) {
-			if (living.hasEffect(ElixirsEffects.FEAR.get())) {
+			if (living.hasEffect(ElixirsEffects.FEAR)) {
 				event.setCanceled(true);
-			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_PROJECTILE)) {
+			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS) && entity.hasEffect(ElixirsEffects.SYMBIOSIS) && !event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_PROJECTILE)) {
 				event.setCanceled(true);
 			}
 
-			if (!event.isCanceled() && entity.hasEffect(ElixirsEffects.LEECH.get())) {
-				int level = entity.getEffect(ElixirsEffects.LEECH.get()).getAmplifier() + 1;
+			if (!event.isCanceled() && entity.hasEffect(ElixirsEffects.LEECH)) {
+				int level = entity.getEffect(ElixirsEffects.LEECH).getAmplifier() + 1;
 				//Back in 1.8.9 you'd get an error if you setHealth > getMaxHealth, i dont know if this is still a thing
 				//and i dont want to find out
 				living.setHealth(Math.min(living.getMaxHealth(), living.getHealth() + (event.getAmount() * 0.2f * level)));
@@ -44,36 +43,36 @@ public class DamageListener {
 	}
 	
 	@SubscribeEvent
-	public static void onLivingDamage(LivingDamageEvent event) {
+	public static void onLivingDamage(LivingDamageEvent.Pre event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
-		if (entity.hasEffect(ElixirsEffects.BURNED.get())) {
-			MobEffectInstance effect = entity.getEffect(ElixirsEffects.BURNED.get());
+		if (entity.hasEffect(ElixirsEffects.BURNED)) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.BURNED);
 			int level = effect.getAmplifier() + 1;
 			
 			if (event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_FIRE)) {	//Didnt know mc had a feature like that, it dit not exist in 1.8 !
-				event.setAmount(event.getAmount() * (1 + (0.5f * level)));
+				event.setNewDamage(event.getNewDamage() * (1 + (0.5f * level)));
 			}
 		}
-		if (entity.hasEffect(ElixirsEffects.CRUMBLING.get())) {
-			MobEffectInstance effect = entity.getEffect(ElixirsEffects.CRUMBLING.get());
+		if (entity.hasEffect(ElixirsEffects.CRUMBLING)) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.CRUMBLING);
 			int level = effect.getAmplifier() + 1;
 			
-			event.setAmount(event.getAmount() * (1 + (0.1f * level)));
+			event.setNewDamage(event.getNewDamage() * (1 + (0.1f * level)));
 		}
 		
 	}
 	
 	@SubscribeEvent
-	public static void onLivingHurt(LivingHurtEvent event) {
+	public static void onLivingHurt(LivingIncomingDamageEvent event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
-		if (entity.hasEffect(ElixirsEffects.UNSTABLE.get())) {
-			int dist = 20 + 10 * entity.getEffect(ElixirsEffects.UNSTABLE.get()).getAmplifier();
+		if (entity.hasEffect(ElixirsEffects.UNSTABLE)) {
+			int dist = 20 + 10 * entity.getEffect(ElixirsEffects.UNSTABLE).getAmplifier();
 			randomTeleport(entity, dist);
 		}
-		if (entity.hasEffect(ElixirsEffects.ENDURANCE.get())) {
-			MobEffectInstance effect = entity.getEffect(ElixirsEffects.ENDURANCE.get());
+		if (entity.hasEffect(ElixirsEffects.ENDURANCE)) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.ENDURANCE);
 			int level = effect.getAmplifier() + 1;
 			
 			event.setAmount(Math.max(0, event.getAmount() * (1 - (0.1f * level))));

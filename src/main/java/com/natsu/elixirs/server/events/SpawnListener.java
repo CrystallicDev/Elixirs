@@ -8,12 +8,12 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID)
+@EventBusSubscriber(modid = Elixirs.MODID)
 public class SpawnListener {
 
 	@SubscribeEvent
@@ -24,10 +24,10 @@ public class SpawnListener {
 		if (world.isClientSide()) return;
 
 		for (Player player : world.players()) {
-			if (player.hasEffect(ElixirsEffects.HYPERCHARGED.get())) {
+			if (player.hasEffect(ElixirsEffects.HYPERCHARGED)) {
 				if (player.distanceTo(bolt) <= 150) {
 					int r = world.getRandom().nextInt(100);
-					if (r <= (5 * (player.getEffect(ElixirsEffects.HYPERCHARGED.get()).getAmplifier() + 1))) {
+					if (r <= (5 * (player.getEffect(ElixirsEffects.HYPERCHARGED).getAmplifier() + 1))) {
 						bolt.setPos(player.getX(), player.getY(), player.getZ());
 					}
 				}

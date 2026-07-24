@@ -19,6 +19,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.resources.PlayerSkin;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -34,40 +37,43 @@ import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.entity.vehicle.Minecart;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.util.ObfuscationReflectionHelper;
+import net.minecraft.core.registries.BuiltInRegistries;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Elixirs.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class FrozenLayerRenderEvent {
 
     
 	@SubscribeEvent
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
         List<EntityType<? extends LivingEntity>> entityTypes = ImmutableList.copyOf(
-                ForgeRegistries.ENTITY_TYPES.getValues().stream()
+                BuiltInRegistries.ENTITY_TYPE.stream()
                         .filter(DefaultAttributes::hasSupplier)
                         .map(entityType -> (EntityType<? extends LivingEntity>) entityType)
                         .collect(Collectors.toList()));
         entityTypes.forEach((entityType -> {
             addLayerIfApplicable(entityType, event);
         }));
-        for (String skinType : event.getSkins()){
-            event.getSkin(skinType).addLayer(new FrozenSolidHandler.FrozenSolidLayer(event.getSkin(skinType)));
+        for (PlayerSkin.Model skinType : event.getSkins()) {
+            PlayerRenderer renderer = event.getSkin(skinType);
+            if (renderer != null) {
+                renderer.addLayer(new FrozenSolidHandler.FrozenSolidLayer(renderer));
+            }
         }
     }
 
 	private static void addLayerIfApplicable(EntityType<? extends LivingEntity> entityType, EntityRenderersEvent.AddLayers event) {
 	    if (entityType == EntityType.ENDER_DRAGON) return;
 	    try {
-	        LivingEntityRenderer renderer = event.getRenderer(entityType);
-	        if (renderer != null) {
+	        EntityRenderer<?> r = event.getRenderer(entityType);
+	        if (r instanceof LivingEntityRenderer renderer) {
 	            renderer.addLayer(new FrozenSolidHandler.FrozenSolidLayer(renderer));
 	        }
 	    } catch (Exception e) {
@@ -82,7 +88,7 @@ public class FrozenLayerRenderEvent {
         Player player = Minecraft.getInstance().player;
 
         if(player != null) {
-            if (player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+            if (player.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
                 boolean isMainHand = event.getHand() == InteractionHand.MAIN_HAND;   
                 if (isMainHand && !player.isInvisible() && event.getItemStack().isEmpty()) {
                     HumanoidArm enumhandside = isMainHand ? player.getMainArm() : player.getMainArm().getOpposite();

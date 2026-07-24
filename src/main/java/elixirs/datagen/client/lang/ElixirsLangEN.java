@@ -5,7 +5,7 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 import com.natsu.elixirs.common.registry.ElixirsPotions;
 
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 public class ElixirsLangEN extends LanguageProvider{
 
@@ -15,34 +15,34 @@ public class ElixirsLangEN extends LanguageProvider{
 	
 	@Override
 	protected void addTranslations() {
-		add(ElixirsEffects.REJUVENATION.get(), "Rejuvenation");
-		add(ElixirsEffects.CLEANSED.get(), "Cleansed");
-		add(ElixirsEffects.WRATH.get(), "Wrath");
-		add(ElixirsEffects.ENDURANCE.get(), "Endurance");
-		add(ElixirsEffects.FRICTION.get(), "Friction");
-		add(ElixirsEffects.SLIPPERY.get(), "Slippery");
+		addEffect(ElixirsEffects.REJUVENATION, "Rejuvenation");
+		addEffect(ElixirsEffects.CLEANSED, "Cleansed");
+		addEffect(ElixirsEffects.WRATH, "Wrath");
+		addEffect(ElixirsEffects.ENDURANCE, "Endurance");
+		addEffect(ElixirsEffects.FRICTION, "Friction");
+		addEffect(ElixirsEffects.SLIPPERY, "Slippery");
 
-		add(ElixirsEffects.CRUMBLING.get(), "Crumbling");
-		add(ElixirsEffects.HYPERCHARGED.get(), "Hypercharged");
-		add(ElixirsEffects.BURNED.get(), "Burned");
-		add(ElixirsEffects.DEPTH_CRUSH.get(), "Depths Crush");
-		add(ElixirsEffects.FROZEN.get(), "Frozen");
-		add(ElixirsEffects.APHAGIA.get(), "Aphagia");
-		add(ElixirsEffects.FEAR.get(), "Fear");
-		add(ElixirsEffects.DEAFENED.get(), "Deafened");
-		add(ElixirsEffects.BLEEDING.get(), "Bleeding");
-		add(ElixirsEffects.SMITED.get(), "Smited");
-		add(ElixirsEffects.DECAY.get(), "Decay");
-		add(ElixirsEffects.PARALYSIS.get(), "Paralysis");
-		add(ElixirsEffects.FROZEN_SOLID.get(), "Frozen Solid");
-		add(ElixirsEffects.SYMBIOSIS.get(), "Symbiosis");
-		add(ElixirsEffects.LEECH.get(), "Leech");
-		add(ElixirsEffects.ATTRACTION.get(), "Attraction");
-		add(ElixirsEffects.HEAVY.get(), "Heavy");
-		add(ElixirsEffects.UNSTABLE.get(), "Unstable");
-		add(ElixirsEffects.RUSTED.get(), "Rusted");
-		add(ElixirsEffects.SHAKEN.get(), "Shaken");
-		add(ElixirsEffects.CONFUSED.get(), "Confused");
+		addEffect(ElixirsEffects.CRUMBLING, "Crumbling");
+		addEffect(ElixirsEffects.HYPERCHARGED, "Hypercharged");
+		addEffect(ElixirsEffects.BURNED, "Burned");
+		addEffect(ElixirsEffects.DEPTH_CRUSH, "Depths Crush");
+		addEffect(ElixirsEffects.FROZEN, "Frozen");
+		addEffect(ElixirsEffects.APHAGIA, "Aphagia");
+		addEffect(ElixirsEffects.FEAR, "Fear");
+		addEffect(ElixirsEffects.DEAFENED, "Deafened");
+		addEffect(ElixirsEffects.BLEEDING, "Bleeding");
+		addEffect(ElixirsEffects.SMITED, "Smited");
+		addEffect(ElixirsEffects.DECAY, "Decay");
+		addEffect(ElixirsEffects.PARALYSIS, "Paralysis");
+		addEffect(ElixirsEffects.FROZEN_SOLID, "Frozen Solid");
+		addEffect(ElixirsEffects.SYMBIOSIS, "Symbiosis");
+		addEffect(ElixirsEffects.LEECH, "Leech");
+		addEffect(ElixirsEffects.ATTRACTION, "Attraction");
+		addEffect(ElixirsEffects.HEAVY, "Heavy");
+		addEffect(ElixirsEffects.UNSTABLE, "Unstable");
+		addEffect(ElixirsEffects.RUSTED, "Rusted");
+		addEffect(ElixirsEffects.SHAKEN, "Shaken");
+		addEffect(ElixirsEffects.CONFUSED, "Confused");
 
 		addPotion("haste", "Haste");
 		addPotion("resistance", "Resistance");

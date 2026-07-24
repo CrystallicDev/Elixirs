@@ -19,15 +19,16 @@ public class SmitedEffect extends MobEffect {
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int intValue) {
+	public boolean applyEffectTick(LivingEntity entity, int intValue) {
 		Level world = entity.level();
 		if (isSunBurnTick(world, entity) && entity.getRemainingFireTicks() <= 0) {
 			entity.setRemainingFireTicks(50);
 		}
+		return true;
 	}
 
 	@Override
-	public boolean isDurationEffectTick(int d, int a) {
+	public boolean shouldApplyEffectTickThisTick(int d, int a) {
 		return d%5 == 0;
 	}
 	

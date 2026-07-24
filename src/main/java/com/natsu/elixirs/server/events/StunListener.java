@@ -6,72 +6,83 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.PlayerContainerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.bus.api.ICancellableEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID)
+@EventBusSubscriber(modid = Elixirs.MODID)
 public class StunListener {
 
 	@SubscribeEvent
 	public static void onAttack(AttackEntityEvent event) {
-	    if (event.isCancelable()) {
-	    	Player player = event.getEntity();
-			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-				event.setCanceled(true);
-			}
-	    }
+	    Player player = event.getEntity();
+		if (player.hasEffect(ElixirsEffects.PARALYSIS) || player.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
+			event.setCanceled(true);
+		}
 	}
 	
+	// PlayerInteractEvent est abstrait en NeoForge : on s'abonne à chaque sous-type annulable.
 	@SubscribeEvent
-	public static void onInteract(PlayerInteractEvent event) {
-		if (event.isCancelable()) {
-			Player player = event.getEntity();
-			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-				event.setCanceled(true);
-			}
+	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+		cancelIfStunned(event);
+	}
+
+	@SubscribeEvent
+	public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+		cancelIfStunned(event);
+	}
+
+	@SubscribeEvent
+	public static void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+		cancelIfStunned(event);
+	}
+
+	@SubscribeEvent
+	public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+		cancelIfStunned(event);
+	}
+
+	@SubscribeEvent
+	public static void onEntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
+		cancelIfStunned(event);
+	}
+
+	private static <T extends PlayerInteractEvent & ICancellableEvent> void cancelIfStunned(T event) {
+		Player player = event.getEntity();
+		if (player.hasEffect(ElixirsEffects.PARALYSIS) || player.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
+			event.setCanceled(true);
 		}
 	}
 	
 	@SubscribeEvent
-	public static void onOpenInventory(PlayerContainerEvent event) {
-	    if (event.isCancelable()) {
-	    	Player player = event.getEntity();
-			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
-				event.setCanceled(true);
-			}
-	    }
-	}
-	
-	@SubscribeEvent
-	public static void onEntityTick(LivingEvent.LivingTickEvent event) {
-	    LivingEntity living = event.getEntity();
+	public static void onEntityTick(EntityTickEvent.Post event) {
+	    if (!(event.getEntity() instanceof LivingEntity living)) return;
 
-	    if (living.hasEffect(ElixirsEffects.PARALYSIS.get()) || living.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+	    if (living.hasEffect(ElixirsEffects.PARALYSIS) || living.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
 	    	living.setDeltaMovement(0, 0, 0);
 	    	living.teleportTo(living.getX(), living.getY(), living.getZ());
 	    	living.setSprinting(false);
 	    	living.setJumping(false);
-	    } else if (living.hasEffect(ElixirsEffects.HEAVY.get())) {
+	    } else if (living.hasEffect(ElixirsEffects.HEAVY)) {
 	    	applyHeavy(living);
 	    }
 	}
 	
 	@SubscribeEvent
-	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-	    Player player = event.player;
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
+	    Player player = event.getEntity();
 
-	    if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+	    if (player.hasEffect(ElixirsEffects.PARALYSIS) || player.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
 	        player.setDeltaMovement(0, 0, 0);
 	        player.teleportTo(player.getX(), player.getY(), player.getZ());
 	        player.setSprinting(false);
 	        player.setJumping(false);
-	    } else if (player.hasEffect(ElixirsEffects.HEAVY.get())) {
+	    } else if (player.hasEffect(ElixirsEffects.HEAVY)) {
 	        applyHeavy(player);
 	    }
 	}
@@ -81,7 +92,7 @@ public class StunListener {
 	    Vec3 movement = living.getDeltaMovement();
 	    double dy = movement.y > 0 ? 0 : movement.y;
 	    if (living.isInWater()) {
-	        int level = living.getEffect(ElixirsEffects.HEAVY.get()).getAmplifier() + 1;
+	        int level = living.getEffect(ElixirsEffects.HEAVY).getAmplifier() + 1;
 	        dy = Math.min(dy, -0.03 * level);
 	    }
 	    living.setDeltaMovement(movement.x, dy, movement.z);

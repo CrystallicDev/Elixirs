@@ -1,22 +1,23 @@
 package com.natsu.elixirs.common.mobeffects.positive;
 
-import java.util.UUID;
+import com.natsu.elixirs.Elixirs;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class WrathEffect extends MobEffect {
 
-	public static final String WrathAttackModifierUUID = "89dd1b8c-528a-46c0-9435-206da3e55953";
-	
+	// 1.21 : un modificateur d'attribut est identifié par une ResourceLocation, plus par un UUID.
+	public static final ResourceLocation WRATH_ATTACK_ID =
+			ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "wrath_attack_damage");
+
 	public WrathEffect() {
 		super(MobEffectCategory.BENEFICIAL, 0xD10000);
-		
-		this.addAttributeModifier(Attributes.ATTACK_DAMAGE, 
-				WrathAttackModifierUUID, 
-				0.6, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+		this.addAttributeModifier(Attributes.ATTACK_DAMAGE, WRATH_ATTACK_ID,
+				0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 	}
 }

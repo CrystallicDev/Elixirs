@@ -20,7 +20,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-@Mixin(value = LivingEntity.class)
+@Mixin(value = LivingEntity.class, remap = false)
 public class LivingEntityMixin {
 
 	@WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F", remap = false))
@@ -28,7 +28,7 @@ public class LivingEntityMixin {
 			Operation<Float> original) {
 		// original.call préserve les wraps des autres mods sur getFriction
 		float baseFriction = original.call(state, level, pos, entity);
-		if (entity instanceof LivingEntity le && le.hasEffect(ElixirsEffects.FRICTION.get())) {
+		if (entity instanceof LivingEntity le && le.hasEffect(ElixirsEffects.FRICTION)) {
 			return Math.min(0.6f, baseFriction);
 		}
 		return baseFriction;

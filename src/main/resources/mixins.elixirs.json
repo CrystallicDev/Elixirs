@@ -2,14 +2,14 @@
     "required": true,
     "minVersion": "0.8",
     "package": "com.natsu.elixirs.mixins",
-    "refmap": "mixins.elixirs.refmap.json",
-    "compatibilityLevel": "JAVA_17",
+    "compatibilityLevel": "JAVA_21",
     "mixins": [
         "LivingEntityMixin",
-        "BoatMixin",
-		"KeyboardInputMixin"
+        "BoatMixin"
     ],
-    "client": [],
+    "client": [
+        "KeyboardInputMixin"
+    ],
     "server": [],
     "injectors": {
         "defaultRequire": 1

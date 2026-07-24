@@ -8,21 +8,21 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID)
+@EventBusSubscriber(modid = Elixirs.MODID)
 public class TickListener {
 
 	@SubscribeEvent
-	public static void onTick(LivingEvent.LivingTickEvent event) {
-		LivingEntity entity = event.getEntity();
-		if (entity == null || entity.level().isClientSide()) return;
+	public static void onTick(EntityTickEvent.Post event) {
+		if (!(event.getEntity() instanceof LivingEntity entity)) return;
+		if (entity.level().isClientSide()) return;
 
-		if (entity.hasEffect(ElixirsEffects.ATTRACTION.get())) {
+		if (entity.hasEffect(ElixirsEffects.ATTRACTION)) {
 			Level world = entity.level();
-			int dist = 15 + (10 * entity.getEffect(ElixirsEffects.ATTRACTION.get()).getAmplifier());
+			int dist = 15 + (10 * entity.getEffect(ElixirsEffects.ATTRACTION).getAmplifier());
 			for (Player player : world.players()) {
 				if (player == entity || player.isSpectator()) continue;
 				if (player.distanceTo(entity) <= dist && player instanceof ServerPlayer serverPlayer) {

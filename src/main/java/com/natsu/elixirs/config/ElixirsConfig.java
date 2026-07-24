@@ -1,24 +1,24 @@
 package com.natsu.elixirs.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ElixirsConfig {
 
-	public static final ForgeConfigSpec SPEC;
+	public static final ModConfigSpec SPEC;
 
-	public static final ForgeConfigSpec.BooleanValue USE_HASTE_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_RESISTANCE_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_DOLPHIN_GRACE_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_GLOWING_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_LUCK_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_HEALTH_BOOST_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_MINING_FATIGUE_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_BLINDNESS_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_WITHER_RECIPE;
-	public static final ForgeConfigSpec.BooleanValue USE_HUNGER_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_HASTE_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_RESISTANCE_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_DOLPHIN_GRACE_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_GLOWING_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_LUCK_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_HEALTH_BOOST_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_MINING_FATIGUE_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_BLINDNESS_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_WITHER_RECIPE;
+	public static final ModConfigSpec.BooleanValue USE_HUNGER_RECIPE;
 	
 	static {
-		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+		ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 		builder.push("vanillaPotionRecipes");
 		USE_HASTE_RECIPE = builder.
 				comment("Allows players to craft Haste potions using Honeycomb")

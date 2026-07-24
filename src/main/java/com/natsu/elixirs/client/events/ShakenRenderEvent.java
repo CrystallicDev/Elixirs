@@ -5,21 +5,21 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ViewportEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.ViewportEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
 public class ShakenRenderEvent {
 
 	@SubscribeEvent
 	public static void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
 	    Minecraft mc = Minecraft.getInstance();
 	    if (mc.player == null) return;
-	    if (!mc.player.hasEffect(ElixirsEffects.SHAKEN.get())) return;
+	    if (!mc.player.hasEffect(ElixirsEffects.SHAKEN)) return;
 
-	    MobEffectInstance effect = mc.player.getEffect(ElixirsEffects.SHAKEN.get());
+	    MobEffectInstance effect = mc.player.getEffect(ElixirsEffects.SHAKEN);
 	    float intensity = 0.8F * (effect.getAmplifier() + 1);
 
 	    int duration = effect.getDuration();

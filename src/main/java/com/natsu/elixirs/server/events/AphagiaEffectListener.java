@@ -1,17 +1,19 @@
 package com.natsu.elixirs.server.events;
 
 import com.natsu.elixirs.Elixirs;
+
+import net.minecraft.core.component.DataComponents;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.UseAnim;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = Elixirs.MODID)
+@EventBusSubscriber(modid = Elixirs.MODID)
 public class AphagiaEffectListener {
 
 	@SubscribeEvent
@@ -20,8 +22,8 @@ public class AphagiaEffectListener {
 		
 		if (entity == null) return;
 		
-		if (entity.hasEffect(ElixirsEffects.APHAGIA.get())) {
-			if (event.getItem().isEdible() || event.getItem().getUseAnimation() == UseAnim.DRINK) {
+		if (entity.hasEffect(ElixirsEffects.APHAGIA)) {
+			if (event.getItem().has(DataComponents.FOOD) || event.getItem().getUseAnimation() == UseAnim.DRINK) {
 				event.setCanceled(true);
 			}
 		}

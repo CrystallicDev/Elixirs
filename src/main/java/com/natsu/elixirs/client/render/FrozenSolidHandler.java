@@ -16,7 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class FrozenSolidHandler {
 
-    public static final ResourceLocation FROZEN_OVERLAY = new ResourceLocation(Elixirs.MODID, "textures/entity/frozen_solid.png");
+    public static final ResourceLocation FROZEN_OVERLAY = ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "textures/entity/frozen_solid.png");
     
 	public static class FrozenSolidLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
 
@@ -30,7 +30,7 @@ public class FrozenSolidHandler {
 	    @Override
 	    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float linbSwingAmount,
 	    		float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-	    	if (entity.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+	    	if (entity.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
 	    		/*try {
 	    			poseStack.pushPose();
 		    		poseStack.scale(1.02f, 1.02f, 1.02f);		//Desperate attempt at avoiding Z fighting :(
@@ -41,7 +41,7 @@ public class FrozenSolidHandler {
 	    		}*/
 	    		EntityModel model = this.renderer.getModel();
 	    		VertexConsumer vC = buffer.getBuffer(RenderType.entityTranslucentCull(FROZEN_OVERLAY));
-	    		model.renderToBuffer(poseStack, vC, packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 0.8f);
+	    		model.renderToBuffer(poseStack, vC, packedLight, OverlayTexture.NO_OVERLAY, 0xCCFFFFFF);
 	    	}
 	    }
 	}
