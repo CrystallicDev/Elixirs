@@ -2,34 +2,20 @@ package elixirs.datagen;
 
 import com.natsu.elixirs.Elixirs;
 
-import elixirs.datagen.client.lang.ElixirsLangEN;
-import elixirs.datagen.client.lang.ElixirsLangFR;
-import net.minecraft.data.DataGenerator;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 
+/**
+ * Génération des lang EN/FR.
+ *
+ * <p>TODO 26.1.2 : {@code GatherDataEvent} a été refondu (devenu abstrait, plus de
+ * {@code includeClient()}/{@code getExistingFileHelper()}, providers ajoutés via
+ * {@code addProvider}/{@code createProvider}, probable split Client/Server). Le datagen est mis en
+ * pause : les fichiers lang sont déjà présents dans {@code resources/assets/elixirs/lang/}, donc le
+ * mod fonctionne sans. À re-porter si on veut régénérer les assets.
+ */
 @EventBusSubscriber(modid = Elixirs.MODID)
 public class ElixirsDataGenerators {
 
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
+	// Datagen désactivé le temps de porter GatherDataEvent (voir TODO ci-dessus).
 
-        DataGenerator gen = event.getGenerator();
-        ExistingFileHelper helper = event.getExistingFileHelper();
-
-        if (event.includeClient()) {
-            //gen.addProvider(new CristalliteBlockStateProvider(gen, helper));
-            //gen.addProvider(new CristalliteItemModelProvider(gen, helper));
-            gen.addProvider(event.includeClient(), new ElixirsLangEN(gen.getPackOutput()));
-            gen.addProvider(event.includeClient(), new ElixirsLangFR(gen.getPackOutput()));
-        }
-
-        if (event.includeServer()) {
-            //gen.addProvider(new CristalliteLootTableProvider(gen));
-            //gen.addProvider(new CristalliteBlockTags(gen, helper));
-           // gen.addProvider(new CristalliteLootTableProvider(gen));
-        }
-    }
 }

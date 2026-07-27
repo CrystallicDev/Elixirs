@@ -1,50 +1,20 @@
 package com.natsu.elixirs.client.render;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.natsu.elixirs.Elixirs;
-import com.natsu.elixirs.common.registry.ElixirsEffects;
 
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.LivingEntity;
 
+/**
+ * Overlay visuel "gelé" (texture appliquée sur les entités sous l'effet FROZEN_SOLID).
+ *
+ * <p>TODO 26.1.2 : la refonte "entity render state" fait que les RenderLayer ne reçoivent plus
+ * l'entité (mais un {@code LivingEntityRenderState}) — impossible de tester {@code hasEffect} dans
+ * la layer sans injecter le flag dans le render state (via {@code RegisterRenderStateModifiersEvent}).
+ * La layer est donc désactivée pour l'instant ; seul le VISUEL est perdu, l'effet gameplay (blocage
+ * des mouvements) reste géré par StunListener + KeyboardInputMixin. À réimplémenter proprement plus tard.
+ */
 public class FrozenSolidHandler {
 
-    public static final Identifier FROZEN_OVERLAY = Identifier.fromNamespaceAndPath(Elixirs.MODID, "textures/entity/frozen_solid.png");
-    
-	public static class FrozenSolidLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
+	public static final Identifier FROZEN_OVERLAY = Identifier.fromNamespaceAndPath(Elixirs.MODID, "textures/entity/frozen_solid.png");
 
-	    private LivingEntityRenderer<T, M> renderer;		// WHY is it private in the superclass ???????? Literally whats the point
-
-		public FrozenSolidLayer(LivingEntityRenderer<T, M> renderer) {
-	    	super(renderer);
-	    	this.renderer = renderer;
-	    }
-	    
-	    @Override
-	    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float linbSwingAmount,
-	    		float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-	    	if (entity.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
-	    		/*try {
-	    			poseStack.pushPose();
-		    		poseStack.scale(1.02f, 1.02f, 1.02f);		//Desperate attempt at avoiding Z fighting :(
-		    		VertexConsumer vertexBuilder = buffer.getBuffer(RenderType.entityTranslucent(FROZEN_OVERLAY));
-		            this.getParentModel().renderToBuffer(poseStack, vertexBuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1F);
-	    		} finally {
-		    		poseStack.popPose();
-	    		}*/
-	    		EntityModel model = this.renderer.getModel();
-	    		VertexConsumer vC = buffer.getBuffer(RenderType.entityTranslucentCull(FROZEN_OVERLAY));
-	    		model.renderToBuffer(poseStack, vC, packedLight, OverlayTexture.NO_OVERLAY, 0xCCFFFFFF);
-	    	}
-	    }
-	}
-	
-	
 }
