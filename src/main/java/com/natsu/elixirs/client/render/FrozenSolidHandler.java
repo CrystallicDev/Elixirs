@@ -11,12 +11,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 
 public class FrozenSolidHandler {
 
-    public static final ResourceLocation FROZEN_OVERLAY = ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "textures/entity/frozen_solid.png");
+    public static final Identifier FROZEN_OVERLAY = Identifier.fromNamespaceAndPath(Elixirs.MODID, "textures/entity/frozen_solid.png");
     
 	public static class FrozenSolidLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
 

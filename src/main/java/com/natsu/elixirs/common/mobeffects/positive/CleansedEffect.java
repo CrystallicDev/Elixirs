@@ -5,6 +5,7 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 
 public class CleansedEffect extends MobEffect {
@@ -14,12 +15,12 @@ public class CleansedEffect extends MobEffect {
 	}
 	
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int intValue) {
+	public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity entity, int intValue) {
 		
 		entity.removeEffect(MobEffects.POISON);
 		entity.removeEffect(MobEffects.WITHER);
 		entity.removeEffect(MobEffects.WEAKNESS);
-		entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+		entity.removeEffect(MobEffects.SLOWNESS);
 		entity.removeEffect(ElixirsEffects.DECAY);
 		entity.removeEffect(ElixirsEffects.SMITED);
 		return true;

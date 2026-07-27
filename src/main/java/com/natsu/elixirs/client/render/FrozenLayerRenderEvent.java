@@ -47,7 +47,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
-@EventBusSubscriber(modid = Elixirs.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Elixirs.MODID, value = Dist.CLIENT)
 public class FrozenLayerRenderEvent {
 
     

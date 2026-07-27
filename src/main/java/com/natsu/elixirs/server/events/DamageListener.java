@@ -91,7 +91,7 @@ public class DamageListener {
 	    for (int i = 0; i < 16; i++) {
 	        double x = entity.getX() + (entity.getRandom().nextDouble() - 0.5) * radius * 2;
 	        double y = Mth.clamp(entity.getY() + (entity.getRandom().nextInt(8) - 4),
-	                serverLevel.getMinBuildHeight(), serverLevel.getMinBuildHeight() + serverLevel.getLogicalHeight() - 1);
+	                serverLevel.getMinY(), serverLevel.getMinY() + serverLevel.getLogicalHeight() - 1);
 	        double z = entity.getZ() + (entity.getRandom().nextDouble() - 0.5) * radius * 2;
 
 	        if (entity.randomTeleport(x, y, z, true)) {

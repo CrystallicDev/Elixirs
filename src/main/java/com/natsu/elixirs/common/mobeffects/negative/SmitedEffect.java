@@ -6,10 +6,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.level.Level;
 
 public class SmitedEffect extends MobEffect {
@@ -19,7 +20,7 @@ public class SmitedEffect extends MobEffect {
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int intValue) {
+	public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity entity, int intValue) {
 		Level world = entity.level();
 		if (isSunBurnTick(world, entity) && entity.getRemainingFireTicks() <= 0) {
 			entity.setRemainingFireTicks(50);
@@ -33,10 +34,10 @@ public class SmitedEffect extends MobEffect {
 	}
 	
 	public static boolean isSunBurnTick(Level level, LivingEntity entity) {
-		if (level.isDay() && !entity.level().isClientSide) {
+		if (level.isBrightOutside() && !entity.level().isClientSide()) {
 			float f = entity.getLightLevelDependentMagicValue();
 			BlockPos blockpos = BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ());
-			boolean flag = entity.isInWaterRainOrBubble() || entity.isInPowderSnow || entity.wasInPowderSnow;
+			boolean flag = entity.isInWaterOrRain() || entity.isInPowderSnow || entity.wasInPowderSnow;
 			if (f > 0.5F && !flag && entity.level().canSeeSky(blockpos)) {
 				return true;
 			}

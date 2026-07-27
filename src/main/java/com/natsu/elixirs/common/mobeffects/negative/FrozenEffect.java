@@ -2,9 +2,10 @@ package com.natsu.elixirs.common.mobeffects.negative;
 
 import com.natsu.elixirs.Elixirs;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
@@ -13,16 +14,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class FrozenEffect extends MobEffect {
 
-	// 1.21 : un modificateur d'attribut est identifié par une ResourceLocation, plus par un UUID.
-	public static final ResourceLocation FROZEN_MOVE_SPEED_ID =
-			ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "frozen_move_speed");
+	// 1.21 : un modificateur d'attribut est identifié par une Identifier, plus par un UUID.
+	public static final Identifier FROZEN_MOVE_SPEED_ID =
+			Identifier.fromNamespaceAndPath(Elixirs.MODID, "frozen_move_speed");
 
 	public FrozenEffect() {
 		super(MobEffectCategory.HARMFUL, 0x08EBFF);
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity entity, int amplifier) {
 
 		AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
 		if (speed == null) return true;

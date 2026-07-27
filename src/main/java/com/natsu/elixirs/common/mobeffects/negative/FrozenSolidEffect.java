@@ -18,7 +18,7 @@ public class FrozenSolidEffect extends MobEffect {
 	}
 	
 	@Override
-	public void applyInstantenousEffect(@Nullable Entity entity, @Nullable Entity entity2, LivingEntity victim, int p_19465_, double p_19466_) {
+	public void applyInstantenousEffect(net.minecraft.server.level.ServerLevel level, @Nullable Entity entity, @Nullable Entity entity2, LivingEntity victim, int p_19465_, double p_19466_) {
 		victim.playSound(SoundEvents.GLASS_BREAK, 1.0f, 1.0f);
 	}
 }

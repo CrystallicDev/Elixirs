@@ -6,13 +6,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
-import net.minecraft.client.player.Input;
+import net.minecraft.client.player.ClientInput;
 import org.spongepowered.asm.mixin.injection.At;
 import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.client.player.LocalPlayer;
 
 @Mixin(value = KeyboardInput.class, remap = false)
-public class KeyboardInputMixin extends Input {
+public class KeyboardInputMixin extends ClientInput {
 
     @Inject(method = "tick(ZF)V", at = @At("TAIL"))
     private void onTick(boolean isSneaking, float movementMultiplier, CallbackInfo ci) {

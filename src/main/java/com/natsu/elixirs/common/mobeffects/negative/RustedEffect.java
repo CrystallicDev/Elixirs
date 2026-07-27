@@ -2,9 +2,10 @@ package com.natsu.elixirs.common.mobeffects.negative;
 
 import com.natsu.elixirs.Elixirs;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
@@ -14,16 +15,16 @@ import net.minecraft.world.item.ItemStack;
 
 public class RustedEffect extends MobEffect {
 
-	// 1.21 : un modificateur d'attribut est identifié par une ResourceLocation, plus par un UUID.
-	public static final ResourceLocation RUSTED_MOVE_SPEED_ID =
-			ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "rusted_move_speed");
+	// 1.21 : un modificateur d'attribut est identifié par une Identifier, plus par un UUID.
+	public static final Identifier RUSTED_MOVE_SPEED_ID =
+			Identifier.fromNamespaceAndPath(Elixirs.MODID, "rusted_move_speed");
 
 	public RustedEffect() {
 		super(MobEffectCategory.HARMFUL, 0x9E5600);
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity entity, int amplifier) {
 
 		AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
 		if (speed == null) return true;
@@ -46,7 +47,10 @@ public class RustedEffect extends MobEffect {
 
 	private int getTotalArmorPieces(LivingEntity entity) {
 		int count = 0;
-		for (ItemStack stack : entity.getArmorSlots()) {
+		for (net.minecraft.world.entity.EquipmentSlot slot : new net.minecraft.world.entity.EquipmentSlot[]{
+				net.minecraft.world.entity.EquipmentSlot.HEAD, net.minecraft.world.entity.EquipmentSlot.CHEST,
+				net.minecraft.world.entity.EquipmentSlot.LEGS, net.minecraft.world.entity.EquipmentSlot.FEET}) {
+			ItemStack stack = entity.getItemBySlot(slot);
 			if (stack == null || stack.isEmpty()) continue;
 			count++;
 		}

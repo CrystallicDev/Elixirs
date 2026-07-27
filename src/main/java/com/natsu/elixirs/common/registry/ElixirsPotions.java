@@ -21,25 +21,25 @@ public class ElixirsPotions {
 	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION, Elixirs.MODID);
 
 	public static final DeferredHolder<Potion, Potion> HASTE = POTIONS.register("haste", 
-			() -> new Potion("haste", new MobEffectInstance(MobEffects.DIG_SPEED, 3*60*20)));
+			() -> new Potion("haste", new MobEffectInstance(MobEffects.HASTE, 3*60*20)));
 	public static final DeferredHolder<Potion, Potion> HASTE_LONG = POTIONS.register("long_haste", 
-			() -> new Potion("haste", new MobEffectInstance(MobEffects.DIG_SPEED, 8*60*20)));
+			() -> new Potion("haste", new MobEffectInstance(MobEffects.HASTE, 8*60*20)));
 	public static final DeferredHolder<Potion, Potion> HASTE_STRONG = POTIONS.register("strong_haste", 
-			() -> new Potion("haste", new MobEffectInstance(MobEffects.DIG_SPEED, 90*20, 1)));
+			() -> new Potion("haste", new MobEffectInstance(MobEffects.HASTE, 90*20, 1)));
 
 	public static final DeferredHolder<Potion, Potion> RESISTANCE = POTIONS.register("resistance", 
-			() -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3*60*20)));
+			() -> new Potion("resistance", new MobEffectInstance(MobEffects.RESISTANCE, 3*60*20)));
 	public static final DeferredHolder<Potion, Potion> RESISTANCE_LONG = POTIONS.register("long_resistance", 
-			() -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 8*60*20)));
+			() -> new Potion("resistance", new MobEffectInstance(MobEffects.RESISTANCE, 8*60*20)));
 	public static final DeferredHolder<Potion, Potion> RESISTANCE_STRONG = POTIONS.register("strong_resistance", 
-			() -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 90*20, 1)));
+			() -> new Potion("resistance", new MobEffectInstance(MobEffects.RESISTANCE, 90*20, 1)));
 
 	public static final DeferredHolder<Potion, Potion> MINING_FATIGUE = POTIONS.register("mining_fatigue", 
-			() -> new Potion("mining_fatigue", new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 45*20)));
+			() -> new Potion("mining_fatigue", new MobEffectInstance(MobEffects.MINING_FATIGUE, 45*20)));
 	public static final DeferredHolder<Potion, Potion> MINING_FATIGUE_LONG = POTIONS.register("long_mining_fatigue", 
-			() -> new Potion("mining_fatigue", new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 90*20)));
+			() -> new Potion("mining_fatigue", new MobEffectInstance(MobEffects.MINING_FATIGUE, 90*20)));
 	public static final DeferredHolder<Potion, Potion> MINING_FATIGUE_STRONG = POTIONS.register("strong_mining_fatigue", 
-			() -> new Potion("mining_fatigue", new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*20, 1)));
+			() -> new Potion("mining_fatigue", new MobEffectInstance(MobEffects.MINING_FATIGUE, 20*20, 1)));
 
 	public static final DeferredHolder<Potion, Potion> HUNGER = POTIONS.register("hunger", 
 			() -> new Potion("hunger", new MobEffectInstance(MobEffects.HUNGER, 90*20)));

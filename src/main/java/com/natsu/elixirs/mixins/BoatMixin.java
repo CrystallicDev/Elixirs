@@ -10,17 +10,17 @@ import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.phys.Vec3;
 
 
 
-@Mixin(value = Boat.class, remap = false)
+@Mixin(value = AbstractBoat.class, remap = false)
 public class BoatMixin {
 
     @Inject(method = "getGroundFriction()F", at = @At("RETURN"), cancellable = true)
     private void modifyGroundFriction(CallbackInfoReturnable<Float> cir) {
-        Boat boat = (Boat)(Object)this;
+        AbstractBoat boat = (AbstractBoat)(Object)this;
         float baseFriction = cir.getReturnValue();
         if (!boat.getPassengers().isEmpty()) {
             if (boat.getPassengers().get(0) instanceof LivingEntity living) {

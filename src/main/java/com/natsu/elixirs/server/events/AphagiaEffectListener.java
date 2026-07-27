@@ -6,7 +6,7 @@ import net.minecraft.core.component.DataComponents;
 import com.natsu.elixirs.common.registry.ElixirsEffects;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -23,7 +23,7 @@ public class AphagiaEffectListener {
 		if (entity == null) return;
 		
 		if (entity.hasEffect(ElixirsEffects.APHAGIA)) {
-			if (event.getItem().has(DataComponents.FOOD) || event.getItem().getUseAnimation() == UseAnim.DRINK) {
+			if (event.getItem().has(DataComponents.FOOD) || event.getItem().getUseAnimation() == ItemUseAnimation.DRINK) {
 				event.setCanceled(true);
 			}
 		}
