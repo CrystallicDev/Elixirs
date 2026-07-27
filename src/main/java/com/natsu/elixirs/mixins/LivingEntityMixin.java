@@ -23,7 +23,8 @@ import net.minecraft.world.phys.Vec3;
 @Mixin(value = LivingEntity.class, remap = false)
 public class LivingEntityMixin {
 
-	@WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F", remap = false))
+	// 26.1 : la logique de friction a été extraite de travel() vers travelInAir().
+	@WrapOperation(method = "travelInAir", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F", remap = false))
 	private float modifyFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity,
 			Operation<Float> original) {
 		// original.call préserve les wraps des autres mods sur getFriction
