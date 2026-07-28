@@ -16,18 +16,12 @@ public class StunListener {
 	public static void onClientTick(ClientTickEvent.Post event) {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.player == null) return;
-		
+
+		// Le mouvement/saut est géré dans KeyboardInputMixin (au TAIL de tick, sinon 1 tick de retard).
+		// Ici on bloque juste l'ouverture d'inventaire pendant une immobilisation totale.
 		if (mc.player.hasEffect(ElixirsEffects.PARALYSIS) || mc.player.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
-			mc.options.keyUp.setDown(false);
-			mc.options.keyDown.setDown(false);
-			mc.options.keyLeft.setDown(false);
-			mc.options.keyRight.setDown(false);
-			mc.options.keyJump.setDown(false);
 			mc.options.keyInventory.setDown(false);
-		} else if (mc.player.hasEffect(ElixirsEffects.HEAVY)) {
-			mc.options.keyJump.setDown(false);
 		}
-		
 	}
 	
 	
