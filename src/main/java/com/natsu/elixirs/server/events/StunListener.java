@@ -22,7 +22,7 @@ public class StunListener {
 	public static void onAttack(AttackEntityEvent event) {
 	    if (event.isCancelable()) {
 	    	Player player = event.getEntity();
-			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+			if (player.hasEffect(ElixirsEffects.PARALYSIS.getHolder().get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.getHolder().get())) {
 				event.setCanceled(true);
 			}
 	    }
@@ -32,7 +32,7 @@ public class StunListener {
 	public static void onInteract(PlayerInteractEvent event) {
 		if (event.isCancelable()) {
 			Player player = event.getEntity();
-			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+			if (player.hasEffect(ElixirsEffects.PARALYSIS.getHolder().get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.getHolder().get())) {
 				event.setCanceled(true);
 			}
 		}
@@ -42,7 +42,7 @@ public class StunListener {
 	public static void onOpenInventory(PlayerContainerEvent event) {
 	    if (event.isCancelable()) {
 	    	Player player = event.getEntity();
-			if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+			if (player.hasEffect(ElixirsEffects.PARALYSIS.getHolder().get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.getHolder().get())) {
 				event.setCanceled(true);
 			}
 	    }
@@ -52,12 +52,12 @@ public class StunListener {
 	public static void onEntityTick(LivingEvent.LivingTickEvent event) {
 	    LivingEntity living = event.getEntity();
 
-	    if (living.hasEffect(ElixirsEffects.PARALYSIS.get()) || living.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+	    if (living.hasEffect(ElixirsEffects.PARALYSIS.getHolder().get()) || living.hasEffect(ElixirsEffects.FROZEN_SOLID.getHolder().get())) {
 	    	living.setDeltaMovement(0, 0, 0);
 	    	living.teleportTo(living.getX(), living.getY(), living.getZ());
 	    	living.setSprinting(false);
 	    	living.setJumping(false);
-	    } else if (living.hasEffect(ElixirsEffects.HEAVY.get())) {
+	    } else if (living.hasEffect(ElixirsEffects.HEAVY.getHolder().get())) {
 	    	applyHeavy(living);
 	    }
 	}
@@ -66,12 +66,12 @@ public class StunListener {
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
 	    Player player = event.player;
 
-	    if (player.hasEffect(ElixirsEffects.PARALYSIS.get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+	    if (player.hasEffect(ElixirsEffects.PARALYSIS.getHolder().get()) || player.hasEffect(ElixirsEffects.FROZEN_SOLID.getHolder().get())) {
 	        player.setDeltaMovement(0, 0, 0);
 	        player.teleportTo(player.getX(), player.getY(), player.getZ());
 	        player.setSprinting(false);
 	        player.setJumping(false);
-	    } else if (player.hasEffect(ElixirsEffects.HEAVY.get())) {
+	    } else if (player.hasEffect(ElixirsEffects.HEAVY.getHolder().get())) {
 	        applyHeavy(player);
 	    }
 	}
@@ -81,7 +81,7 @@ public class StunListener {
 	    Vec3 movement = living.getDeltaMovement();
 	    double dy = movement.y > 0 ? 0 : movement.y;
 	    if (living.isInWater()) {
-	        int level = living.getEffect(ElixirsEffects.HEAVY.get()).getAmplifier() + 1;
+	        int level = living.getEffect(ElixirsEffects.HEAVY.getHolder().get()).getAmplifier() + 1;
 	        dy = Math.min(dy, -0.03 * level);
 	    }
 	    living.setDeltaMovement(movement.x, dy, movement.z);

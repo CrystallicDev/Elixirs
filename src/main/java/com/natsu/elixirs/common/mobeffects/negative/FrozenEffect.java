@@ -12,56 +12,43 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class FrozenEffect extends MobEffect {
 
-	public static final UUID FrozenMoveSpeedModifierUUID = UUID.fromString("636df67c-ee75-46fb-b508-b2207ec04a69");
-	public static final UUID FrozenDigSpeedModifierUUID = UUID.fromString("049b6bb0-c62d-4460-be11-48fd852ae9ce");
-	
+	// 1.20.6 : un modificateur d'attribut est encore identifié par un UUID (ResourceLocation = 1.21).
+	public static final UUID FROZEN_MOVE_SPEED_ID = UUID.fromString("636df67c-ee75-46fb-b508-b2207ec04a69");
+
 	public FrozenEffect() {
 		super(MobEffectCategory.HARMFUL, 0x08EBFF);
 	}
 
 	@Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 
-        AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
-        if(speed == null) return;
+		AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+		if (speed == null) return true;
 
-        boolean inWater = entity.isInWater();
-
-        AttributeModifier modifier = new AttributeModifier(
-        		FrozenMoveSpeedModifierUUID,
-                "water_speed_penalty",
-                -0.2,
-                AttributeModifier.Operation.MULTIPLY_TOTAL
-        );
-
-        if(inWater) {
-            if(speed.getModifier(FrozenMoveSpeedModifierUUID) == null) {
-                speed.addTransientModifier(modifier);
-            }
-        } else {
-            if(speed.getModifier(FrozenMoveSpeedModifierUUID) != null) {
-                speed.removeModifier(FrozenMoveSpeedModifierUUID);
-            }
-        }
-	}
-	
-	@Override
-	public boolean isDurationEffectTick(int d, int a) {
+		if (entity.isInWater()) {
+			if (speed.getModifier(FROZEN_MOVE_SPEED_ID) == null) {
+				speed.addTransientModifier(new AttributeModifier(
+						FROZEN_MOVE_SPEED_ID, "frozen_move_speed", -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+			}
+		} else {
+			speed.removeModifier(FROZEN_MOVE_SPEED_ID);
+		}
 		return true;
 	}
-	
+
 	@Override
-    public void removeAttributeModifiers(LivingEntity entity,
-                                         AttributeMap attributes,
-                                         int amplifier) {
+	public boolean shouldApplyEffectTickThisTick(int d, int a) {
+		return true;
+	}
 
-        super.removeAttributeModifiers(entity, attributes, amplifier);
+	@Override
+	public void removeAttributeModifiers(AttributeMap attributes) {
+		super.removeAttributeModifiers(attributes);
 
-        AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+		AttributeInstance speed = attributes.getInstance(Attributes.MOVEMENT_SPEED);
+		if (speed != null) {
+			speed.removeModifier(FROZEN_MOVE_SPEED_ID);
+		}
+	}
 
-        if(speed != null) {
-            speed.removeModifier(FrozenMoveSpeedModifierUUID);
-        }
-    }
-	
 }

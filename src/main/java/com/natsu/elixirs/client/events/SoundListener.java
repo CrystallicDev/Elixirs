@@ -18,7 +18,7 @@ public class SoundListener {
     public static void onPlaySound(PlaySoundEvent event) {
         Entity entity = Minecraft.getInstance().player;
         if (entity instanceof Player player) {
-            if (player.hasEffect(ElixirsEffects.DEAFENED.get())) {
+            if (player.hasEffect(ElixirsEffects.DEAFENED.getHolder().get())) {
                 event.setSound(null);
             }
         }

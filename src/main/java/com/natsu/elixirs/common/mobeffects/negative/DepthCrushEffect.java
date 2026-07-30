@@ -18,7 +18,7 @@ public class DepthCrushEffect extends MobEffect {
 	}
 	
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 
 	    if (!entity.level().isClientSide) {
 	        if (entity.isEyeInFluid(FluidTags.WATER)) {
@@ -27,10 +27,11 @@ public class DepthCrushEffect extends MobEffect {
 	            entity.hurt(entity.damageSources().drown(), 2.0F);
 	        }
 	    }
+		return true;
 	}
 
 	@Override
-	public boolean isDurationEffectTick(int duration, int amplifier) {
+	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
 	    return duration % 20 == 0;
 	}
 }

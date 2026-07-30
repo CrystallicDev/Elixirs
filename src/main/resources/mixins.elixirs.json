@@ -2,7 +2,6 @@
     "required": true,
     "minVersion": "0.8",
     "package": "com.natsu.elixirs.mixins",
-    "refmap": "mixins.elixirs.refmap.json",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "LivingEntityMixin",

@@ -58,7 +58,7 @@ public class FrozenLayerRenderEvent {
         entityTypes.forEach((entityType -> {
             addLayerIfApplicable(entityType, event);
         }));
-        for (String skinType : event.getSkins()){
+        for (net.minecraft.client.resources.PlayerSkin.Model skinType : event.getSkins()){
             event.getSkin(skinType).addLayer(new FrozenSolidHandler.FrozenSolidLayer(event.getSkin(skinType)));
         }
     }
@@ -82,7 +82,7 @@ public class FrozenLayerRenderEvent {
         Player player = Minecraft.getInstance().player;
 
         if(player != null) {
-            if (player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+            if (player.hasEffect(ElixirsEffects.FROZEN_SOLID.getHolder().get())) {
                 boolean isMainHand = event.getHand() == InteractionHand.MAIN_HAND;   
                 if (isMainHand && !player.isInvisible() && event.getItemStack().isEmpty()) {
                     HumanoidArm enumhandside = isMainHand ? player.getMainArm() : player.getMainArm().getOpposite();

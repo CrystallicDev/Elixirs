@@ -20,8 +20,8 @@ public class AphagiaEffectListener {
 		
 		if (entity == null) return;
 		
-		if (entity.hasEffect(ElixirsEffects.APHAGIA.get())) {
-			if (event.getItem().isEdible() || event.getItem().getUseAnimation() == UseAnim.DRINK) {
+		if (entity.hasEffect(ElixirsEffects.APHAGIA.getHolder().get())) {
+			if (event.getItem().has(net.minecraft.core.component.DataComponents.FOOD) || event.getItem().getUseAnimation() == UseAnim.DRINK) {
 				event.setCanceled(true);
 			}
 		}

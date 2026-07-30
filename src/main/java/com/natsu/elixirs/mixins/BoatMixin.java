@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 
 
 
-@Mixin(value = Boat.class)
+@Mixin(value = Boat.class, remap = false)
 public class BoatMixin {
 
     @Inject(method = "getGroundFriction()F", at = @At("RETURN"), cancellable = true)
@@ -24,7 +24,7 @@ public class BoatMixin {
         float baseFriction = cir.getReturnValue();
         if (!boat.getPassengers().isEmpty()) {
             if (boat.getPassengers().get(0) instanceof LivingEntity living) {
-                if (living.hasEffect(ElixirsEffects.SLIPPERY.get())) {
+                if (living.hasEffect(ElixirsEffects.SLIPPERY.getHolder().get())) {
                     cir.setReturnValue(Math.max(0.98f, baseFriction));
                     return;
                 }

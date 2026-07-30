@@ -17,9 +17,9 @@ public class ShakenRenderEvent {
 	public static void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
 	    Minecraft mc = Minecraft.getInstance();
 	    if (mc.player == null) return;
-	    if (!mc.player.hasEffect(ElixirsEffects.SHAKEN.get())) return;
+	    if (!mc.player.hasEffect(ElixirsEffects.SHAKEN.getHolder().get())) return;
 
-	    MobEffectInstance effect = mc.player.getEffect(ElixirsEffects.SHAKEN.get());
+	    MobEffectInstance effect = mc.player.getEffect(ElixirsEffects.SHAKEN.getHolder().get());
 	    float intensity = 0.8F * (effect.getAmplifier() + 1);
 
 	    int duration = effect.getDuration();

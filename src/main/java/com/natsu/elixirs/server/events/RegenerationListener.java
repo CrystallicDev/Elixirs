@@ -19,17 +19,17 @@ public class RegenerationListener {
 		
 		if (entity == null) return; 		// Safe check, you never now in modded envs
 		
-		if (entity.hasEffect(ElixirsEffects.BLEEDING.get())) {
+		if (entity.hasEffect(ElixirsEffects.BLEEDING.getHolder().get())) {
 			event.setAmount(0);
 		} else {
-			if (entity.hasEffect(ElixirsEffects.REJUVENATION.get())) {
-				MobEffectInstance effect = entity.getEffect(ElixirsEffects.REJUVENATION.get());
+			if (entity.hasEffect(ElixirsEffects.REJUVENATION.getHolder().get())) {
+				MobEffectInstance effect = entity.getEffect(ElixirsEffects.REJUVENATION.getHolder().get());
 				int level = effect.getAmplifier() + 1;
 				
 				event.setAmount(event.getAmount() * (1 + (0.5f * level)));
 			} 
-			if (entity.hasEffect(ElixirsEffects.DECAY.get())) {
-				MobEffectInstance effect = entity.getEffect(ElixirsEffects.DECAY.get());
+			if (entity.hasEffect(ElixirsEffects.DECAY.getHolder().get())) {
+				MobEffectInstance effect = entity.getEffect(ElixirsEffects.DECAY.getHolder().get());
 				int level = effect.getAmplifier() + 1;
 				
 				event.setAmount(event.getAmount() * (1 - (0.15f * level)));

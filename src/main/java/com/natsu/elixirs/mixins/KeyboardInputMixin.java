@@ -11,14 +11,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.client.player.LocalPlayer;
 
-@Mixin(KeyboardInput.class)
+@Mixin(value = KeyboardInput.class, remap = false)
 public class KeyboardInputMixin extends Input {
 
     @Inject(method = "tick(ZF)V", at = @At("TAIL"))
     private void onTick(boolean isSneaking, float movementMultiplier, CallbackInfo ci) {
         LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
         if (player == null) return;
-        if (!player.hasEffect(ElixirsEffects.CONFUSED.get())) return; 
+        if (!player.hasEffect(ElixirsEffects.CONFUSED.getHolder().get())) return; 
         float oldForward = this.forwardImpulse;
         this.forwardImpulse = -this.forwardImpulse;
         this.leftImpulse = -this.leftImpulse;

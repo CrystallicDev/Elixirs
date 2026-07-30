@@ -17,14 +17,14 @@ public class StunListener {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.player == null) return;
 		
-		if (mc.player.hasEffect(ElixirsEffects.PARALYSIS.get()) || mc.player.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+		if (mc.player.hasEffect(ElixirsEffects.PARALYSIS.getHolder().get()) || mc.player.hasEffect(ElixirsEffects.FROZEN_SOLID.getHolder().get())) {
 			mc.options.keyUp.setDown(false);
 			mc.options.keyDown.setDown(false);
 			mc.options.keyLeft.setDown(false);
 			mc.options.keyRight.setDown(false);
 			mc.options.keyJump.setDown(false);
 			mc.options.keyInventory.setDown(false);
-		} else if (mc.player.hasEffect(ElixirsEffects.HEAVY.get())) {
+		} else if (mc.player.hasEffect(ElixirsEffects.HEAVY.getHolder().get())) {
 			mc.options.keyJump.setDown(false);
 		}
 		

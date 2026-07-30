@@ -28,14 +28,14 @@ public class DamageListener {
 		Entity source = event.getSource().getEntity();
 		
 		if (source instanceof LivingEntity living) {
-			if (living.hasEffect(ElixirsEffects.FEAR.get())) {
+			if (living.hasEffect(ElixirsEffects.FEAR.getHolder().get())) {
 				event.setCanceled(true);
-			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.get()) && !event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_PROJECTILE)) {
+			} else if (living.hasEffect(ElixirsEffects.SYMBIOSIS.getHolder().get()) && entity.hasEffect(ElixirsEffects.SYMBIOSIS.getHolder().get()) && !event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_PROJECTILE)) {
 				event.setCanceled(true);
 			}
 
-			if (!event.isCanceled() && entity.hasEffect(ElixirsEffects.LEECH.get())) {
-				int level = entity.getEffect(ElixirsEffects.LEECH.get()).getAmplifier() + 1;
+			if (!event.isCanceled() && entity.hasEffect(ElixirsEffects.LEECH.getHolder().get())) {
+				int level = entity.getEffect(ElixirsEffects.LEECH.getHolder().get()).getAmplifier() + 1;
 				//Back in 1.8.9 you'd get an error if you setHealth > getMaxHealth, i dont know if this is still a thing
 				//and i dont want to find out
 				living.setHealth(Math.min(living.getMaxHealth(), living.getHealth() + (event.getAmount() * 0.2f * level)));
@@ -47,16 +47,16 @@ public class DamageListener {
 	public static void onLivingDamage(LivingDamageEvent event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
-		if (entity.hasEffect(ElixirsEffects.BURNED.get())) {
-			MobEffectInstance effect = entity.getEffect(ElixirsEffects.BURNED.get());
+		if (entity.hasEffect(ElixirsEffects.BURNED.getHolder().get())) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.BURNED.getHolder().get());
 			int level = effect.getAmplifier() + 1;
 			
 			if (event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_FIRE)) {	//Didnt know mc had a feature like that, it dit not exist in 1.8 !
 				event.setAmount(event.getAmount() * (1 + (0.5f * level)));
 			}
 		}
-		if (entity.hasEffect(ElixirsEffects.CRUMBLING.get())) {
-			MobEffectInstance effect = entity.getEffect(ElixirsEffects.CRUMBLING.get());
+		if (entity.hasEffect(ElixirsEffects.CRUMBLING.getHolder().get())) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.CRUMBLING.getHolder().get());
 			int level = effect.getAmplifier() + 1;
 			
 			event.setAmount(event.getAmount() * (1 + (0.1f * level)));
@@ -68,12 +68,12 @@ public class DamageListener {
 	public static void onLivingHurt(LivingHurtEvent event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
-		if (entity.hasEffect(ElixirsEffects.UNSTABLE.get())) {
-			int dist = 20 + 10 * entity.getEffect(ElixirsEffects.UNSTABLE.get()).getAmplifier();
+		if (entity.hasEffect(ElixirsEffects.UNSTABLE.getHolder().get())) {
+			int dist = 20 + 10 * entity.getEffect(ElixirsEffects.UNSTABLE.getHolder().get()).getAmplifier();
 			randomTeleport(entity, dist);
 		}
-		if (entity.hasEffect(ElixirsEffects.ENDURANCE.get())) {
-			MobEffectInstance effect = entity.getEffect(ElixirsEffects.ENDURANCE.get());
+		if (entity.hasEffect(ElixirsEffects.ENDURANCE.getHolder().get())) {
+			MobEffectInstance effect = entity.getEffect(ElixirsEffects.ENDURANCE.getHolder().get());
 			int level = effect.getAmplifier() + 1;
 			
 			event.setAmount(Math.max(0, event.getAmount() * (1 - (0.1f * level))));

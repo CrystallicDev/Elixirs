@@ -23,9 +23,9 @@ public class CameraEventHandler {
     public static void onComputeCameraAngles(ViewportEvent.ComputeCameraAngles event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
-        if (!mc.player.hasEffect(ElixirsEffects.SHAKEN.get())) return;
+        if (!mc.player.hasEffect(ElixirsEffects.SHAKEN.getHolder().get())) return;
 
-        MobEffectInstance effect = mc.player.getEffect(ElixirsEffects.SHAKEN.get());
+        MobEffectInstance effect = mc.player.getEffect(ElixirsEffects.SHAKEN.getHolder().get());
         float intensity = 0.5f * (effect.getAmplifier() + 1);
 
         currentShakeX += ((RANDOM.nextFloat() * 2 - 1) * intensity - currentShakeX) * 0.3f;

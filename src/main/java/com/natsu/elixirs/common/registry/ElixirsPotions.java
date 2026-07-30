@@ -3,18 +3,14 @@ package com.natsu.elixirs.common.registry;
 import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.config.ElixirsConfig;
 
-import net.minecraft.world.effect.MobEffect;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -89,47 +85,47 @@ public class ElixirsPotions {
 	public static final RegistryObject<Potion> HEALTH_BOOST_STRONG = POTIONS.register("strong_health_boost", 
 			() -> new Potion("health_boost", new MobEffectInstance(MobEffects.HEALTH_BOOST, 45*20, 1)));
 	
-	public static void initRecipes() {
+	// 1.20.6 : le brewing passe par le BrewingRecipeRegisterEvent → PotionBrewing.Builder.addMix
+	// (Holder<Potion>, Item, Holder<Potion>), plus de BrewingRecipeRegistry ni de StrictNBTIngredient.
+	public static void initRecipes(PotionBrewing.Builder builder) {
 		Elixirs.LOGGER.info("Setting up potion recipes");
 		if (ElixirsConfig.USE_HASTE_RECIPE.get())
-			addPotionChain(Items.HONEYCOMB, HASTE.get(), HASTE_LONG.get(), HASTE_STRONG.get());
+			addPotionChain(builder, Items.HONEYCOMB, HASTE, HASTE_LONG, HASTE_STRONG);
 		if (ElixirsConfig.USE_RESISTANCE_RECIPE.get())
-			addPotionChain(Items.NAUTILUS_SHELL, RESISTANCE.get(), RESISTANCE_LONG.get(), RESISTANCE_STRONG.get());
+			addPotionChain(builder, Items.NAUTILUS_SHELL, RESISTANCE, RESISTANCE_LONG, RESISTANCE_STRONG);
 		if (ElixirsConfig.USE_DOLPHIN_GRACE_RECIPE.get())
-			addPotionChain(Items.PRISMARINE_SHARD, DOLPHIN_GRACE.get(), DOLPHIN_GRACE_LONG.get(), DOLPHIN_GRACE_STRONG.get());
+			addPotionChain(builder, Items.PRISMARINE_SHARD, DOLPHIN_GRACE, DOLPHIN_GRACE_LONG, DOLPHIN_GRACE_STRONG);
 		if (ElixirsConfig.USE_MINING_FATIGUE_RECIPE.get())
-			addPotionChain(Items.DRIED_KELP, MINING_FATIGUE.get(), MINING_FATIGUE_LONG.get(), MINING_FATIGUE_STRONG.get());
+			addPotionChain(builder, Items.DRIED_KELP, MINING_FATIGUE, MINING_FATIGUE_LONG, MINING_FATIGUE_STRONG);
 		if (ElixirsConfig.USE_LUCK_RECIPE.get())
-			addPotionChain(Items.SCUTE, LUCK.get(), LUCK_LONG.get(), LUCK_STRONG.get());
+			addPotionChain(builder, Items.TURTLE_SCUTE, LUCK, LUCK_LONG, LUCK_STRONG);
 		if (ElixirsConfig.USE_WITHER_RECIPE.get())
-			addPotionChain(Items.WITHER_ROSE, WITHER.get(), WITHER_LONG.get(), WITHER_STRONG.get());
+			addPotionChain(builder, Items.WITHER_ROSE, WITHER, WITHER_LONG, WITHER_STRONG);
 		if (ElixirsConfig.USE_BLINDNESS_RECIPE.get())
-			addPotionChain(Items.SLIME_BALL, BLINDNESS.get(), BLINDNESS_LONG.get());
+			addPotionChain(builder, Items.SLIME_BALL, BLINDNESS, BLINDNESS_LONG);
 		if (ElixirsConfig.USE_GLOWING_RECIPE.get())
-			addPotionChain(Items.GLOW_INK_SAC, GLOWING.get(), GLOWING_LONG.get());
+			addPotionChain(builder, Items.GLOW_INK_SAC, GLOWING, GLOWING_LONG);
 		if (ElixirsConfig.USE_HUNGER_RECIPE.get())
-			addPotionChain(Items.SEA_PICKLE, HUNGER.get(), HUNGER_LONG.get(), HUNGER_STRONG.get());
+			addPotionChain(builder, Items.SEA_PICKLE, HUNGER, HUNGER_LONG, HUNGER_STRONG);
 		if (ElixirsConfig.USE_HEALTH_BOOST_RECIPE.get())
-			addPotionChain(Items.NETHERITE_SCRAP, HEALTH_BOOST.get(), HEALTH_BOOST_LONG.get(), HEALTH_BOOST_STRONG.get());
+			addPotionChain(builder, Items.NETHERITE_SCRAP, HEALTH_BOOST, HEALTH_BOOST_LONG, HEALTH_BOOST_STRONG);
+	}
+
+	private static Holder<Potion> holder(RegistryObject<Potion> ro) {
+		return ro.getHolder().orElseThrow();
 	}
 
 	// Awkward + ingredient = base, base + Redstone = longue, base + Glowstone = forte
-	private static void addPotionChain(Item ingredient, Potion base, Potion longVariant, Potion strongVariant) {
-		addPotionChain(ingredient, base, longVariant);
-		addBrewingRecipe(base, Items.GLOWSTONE_DUST, strongVariant);
+	private static void addPotionChain(PotionBrewing.Builder b, Item ingredient,
+			RegistryObject<Potion> base, RegistryObject<Potion> longVariant, RegistryObject<Potion> strongVariant) {
+		addPotionChain(b, ingredient, base, longVariant);
+		b.addMix(holder(base), Items.GLOWSTONE_DUST, holder(strongVariant));
 	}
 
-	private static void addPotionChain(Item ingredient, Potion base, Potion longVariant) {
-		addBrewingRecipe(Potions.AWKWARD, ingredient, base);
-		addBrewingRecipe(base, Items.REDSTONE, longVariant);
+	private static void addPotionChain(PotionBrewing.Builder b, Item ingredient,
+			RegistryObject<Potion> base, RegistryObject<Potion> longVariant) {
+		b.addMix(Potions.AWKWARD, ingredient, holder(base));
+		b.addMix(holder(base), Items.REDSTONE, holder(longVariant));
 	}
 
-	private static void addBrewingRecipe(Potion input, Item ingredient, Potion output) {
-		BrewingRecipeRegistry.addRecipe(
-				StrictNBTIngredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), input)),
-				Ingredient.of(ingredient),
-				PotionUtils.setPotion(new ItemStack(Items.POTION), output)
-			);
-	}
-	
 }

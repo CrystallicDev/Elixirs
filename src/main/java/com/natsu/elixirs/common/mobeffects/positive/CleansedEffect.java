@@ -14,19 +14,19 @@ public class CleansedEffect extends MobEffect {
 	}
 	
 	@Override
-	public void applyEffectTick(LivingEntity entity, int intValue) {
+	public boolean applyEffectTick(LivingEntity entity, int intValue) {
 		
 		entity.removeEffect(MobEffects.POISON);
 		entity.removeEffect(MobEffects.WITHER);
 		entity.removeEffect(MobEffects.WEAKNESS);
 		entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-		entity.removeEffect(ElixirsEffects.DECAY.get());
-		entity.removeEffect(ElixirsEffects.SMITED.get());
-		
+		entity.removeEffect(ElixirsEffects.DECAY.getHolder().get());
+		entity.removeEffect(ElixirsEffects.SMITED.getHolder().get());
+		return true;
 	}
 
 	@Override
-	public boolean isDurationEffectTick(int d, int a) {
+	public boolean shouldApplyEffectTickThisTick(int d, int a) {
 		return d%5 == 0;
 	}
 	

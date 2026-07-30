@@ -24,10 +24,10 @@ public class SpawnListener {
 		if (world.isClientSide()) return;
 
 		for (Player player : world.players()) {
-			if (player.hasEffect(ElixirsEffects.HYPERCHARGED.get())) {
+			if (player.hasEffect(ElixirsEffects.HYPERCHARGED.getHolder().get())) {
 				if (player.distanceTo(bolt) <= 150) {
 					int r = world.getRandom().nextInt(100);
-					if (r <= (5 * (player.getEffect(ElixirsEffects.HYPERCHARGED.get()).getAmplifier() + 1))) {
+					if (r <= (5 * (player.getEffect(ElixirsEffects.HYPERCHARGED.getHolder().get()).getAmplifier() + 1))) {
 						bolt.setPos(player.getX(), player.getY(), player.getZ());
 					}
 				}
