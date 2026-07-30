@@ -1,8 +1,7 @@
 package com.natsu.elixirs.common.mobeffects.negative;
 
-import com.natsu.elixirs.Elixirs;
+import java.util.UUID;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,9 +13,8 @@ import net.minecraft.world.item.ItemStack;
 
 public class RustedEffect extends MobEffect {
 
-	// 1.21 : un modificateur d'attribut est identifié par une ResourceLocation, plus par un UUID.
-	public static final ResourceLocation RUSTED_MOVE_SPEED_ID =
-			ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "rusted_move_speed");
+	// 1.20.6 : modificateur identifié par UUID (ResourceLocation = 1.21).
+	public static final UUID RUSTED_MOVE_SPEED_ID = UUID.fromString("407d5b4f-f9d0-4820-9f5d-fbd5b49bed02");
 
 	public RustedEffect() {
 		super(MobEffectCategory.HARMFUL, 0x9E5600);
@@ -39,7 +37,7 @@ public class RustedEffect extends MobEffect {
 		}
 		if (desired != 0.0) {
 			speed.addTransientModifier(new AttributeModifier(
-					RUSTED_MOVE_SPEED_ID, desired, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+					RUSTED_MOVE_SPEED_ID, "rusted_move_speed", desired, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 		}
 		return true;
 	}

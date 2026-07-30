@@ -13,7 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
@@ -21,7 +21,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 public class DamageListener {
 
 	@SubscribeEvent
-	public static void onAttack(LivingIncomingDamageEvent event) {
+	public static void onAttack(LivingHurtEvent event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return; 		// Safe check, there is always weird shit in modded envs
 		Entity source = event.getSource().getEntity();
@@ -43,7 +43,7 @@ public class DamageListener {
 	}
 	
 	@SubscribeEvent
-	public static void onLivingDamage(LivingDamageEvent.Pre event) {
+	public static void onLivingDamage(LivingDamageEvent event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
 		if (entity.hasEffect(ElixirsEffects.BURNED)) {
@@ -51,20 +51,20 @@ public class DamageListener {
 			int level = effect.getAmplifier() + 1;
 			
 			if (event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_FIRE)) {	//Didnt know mc had a feature like that, it dit not exist in 1.8 !
-				event.setNewDamage(event.getNewDamage() * (1 + (0.5f * level)));
+				event.setAmount(event.getAmount() * (1 + (0.5f * level)));
 			}
 		}
 		if (entity.hasEffect(ElixirsEffects.CRUMBLING)) {
 			MobEffectInstance effect = entity.getEffect(ElixirsEffects.CRUMBLING);
 			int level = effect.getAmplifier() + 1;
 			
-			event.setNewDamage(event.getNewDamage() * (1 + (0.1f * level)));
+			event.setAmount(event.getAmount() * (1 + (0.1f * level)));
 		}
 		
 	}
 	
 	@SubscribeEvent
-	public static void onLivingHurt(LivingIncomingDamageEvent event) {
+	public static void onLivingHurt(LivingHurtEvent event) {
 		LivingEntity entity = event.getEntity();
 		if (entity == null) return;
 		if (entity.hasEffect(ElixirsEffects.UNSTABLE)) {

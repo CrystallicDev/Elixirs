@@ -1,8 +1,7 @@
 package com.natsu.elixirs.common.mobeffects.negative;
 
-import com.natsu.elixirs.Elixirs;
+import java.util.UUID;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,9 +12,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class FrozenEffect extends MobEffect {
 
-	// 1.21 : un modificateur d'attribut est identifié par une ResourceLocation, plus par un UUID.
-	public static final ResourceLocation FROZEN_MOVE_SPEED_ID =
-			ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "frozen_move_speed");
+	// 1.20.6 : un modificateur d'attribut est encore identifié par un UUID (ResourceLocation = 1.21).
+	public static final UUID FROZEN_MOVE_SPEED_ID = UUID.fromString("636df67c-ee75-46fb-b508-b2207ec04a69");
 
 	public FrozenEffect() {
 		super(MobEffectCategory.HARMFUL, 0x08EBFF);
@@ -30,7 +28,7 @@ public class FrozenEffect extends MobEffect {
 		if (entity.isInWater()) {
 			if (speed.getModifier(FROZEN_MOVE_SPEED_ID) == null) {
 				speed.addTransientModifier(new AttributeModifier(
-						FROZEN_MOVE_SPEED_ID, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+						FROZEN_MOVE_SPEED_ID, "frozen_move_speed", -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 			}
 		} else {
 			speed.removeModifier(FROZEN_MOVE_SPEED_ID);

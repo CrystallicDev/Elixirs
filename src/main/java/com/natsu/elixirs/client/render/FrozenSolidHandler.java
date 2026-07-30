@@ -16,7 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class FrozenSolidHandler {
 
-    public static final ResourceLocation FROZEN_OVERLAY = ResourceLocation.fromNamespaceAndPath(Elixirs.MODID, "textures/entity/frozen_solid.png");
+    public static final ResourceLocation FROZEN_OVERLAY = new ResourceLocation(Elixirs.MODID, "textures/entity/frozen_solid.png");
     
 	public static class FrozenSolidLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
 
@@ -41,7 +41,7 @@ public class FrozenSolidHandler {
 	    		}*/
 	    		EntityModel model = this.renderer.getModel();
 	    		VertexConsumer vC = buffer.getBuffer(RenderType.entityTranslucentCull(FROZEN_OVERLAY));
-	    		model.renderToBuffer(poseStack, vC, packedLight, OverlayTexture.NO_OVERLAY, 0xCCFFFFFF);
+	    		model.renderToBuffer(poseStack, vC, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.8F);
 	    	}
 	    }
 	}
