@@ -7,8 +7,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class WrathEffect extends MobEffect {
 
-	// 1.20.6 : MobEffect.addAttributeModifier prend un String id (ResourceLocation = 1.21).
-	public static final String WRATH_ATTACK_ID = "wrath_attack_damage";
+	// 1.20.6 : MobEffect.addAttributeModifier(Holder, String, ...) PARSE le String en UUID → chaîne UUID.
+	public static final String WRATH_ATTACK_ID = "89dd1b8c-528a-46c0-9435-206da3e55953";
 
 	public WrathEffect() {
 		super(MobEffectCategory.BENEFICIAL, 0xD10000);
