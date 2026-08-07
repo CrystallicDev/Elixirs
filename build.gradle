@@ -118,7 +118,7 @@ tasks.register('archiveBuild', Copy) {
     mustRunAfter 'jarJar'
     from "${buildDir}/libs/${mod_id}-${mod_version}-all.jar"
     into "${projectDir}/../builds"
-    rename { "${mod_id}-${minecraft_version}-${mod_version}.jar" }
+    rename { "${mod_id}-${minecraft_version}-${mod_loader}-${mod_version}.jar" }
 }
 // jarJar produit le jar distribuable (-all, MixinExtras embarqué) : il doit tourner à chaque build.
 tasks.named('build').configure { dependsOn 'jarJar'; finalizedBy 'archiveBuild' }
