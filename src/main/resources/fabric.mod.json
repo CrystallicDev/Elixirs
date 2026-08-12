@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "elixirs",
+	"version": "${version}",
+	"name": "Elixirs",
+	"description": "A mod that adds lots of new potion effects, to be used by other modders / my own mods.",
+	"authors": [
+		"Natsu91"
+	],
+	"license": "All Rights Reserved",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.natsu.elixirs.ElixirsFabric"
+		],
+		"client": [
+			"com.natsu.elixirs.ElixirsFabricClient"
+		]
+	},
+	"mixins": [
+		"elixirs.mixins.json",
+		{
+			"config": "elixirs.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.18.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

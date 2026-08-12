@@ -20,8 +20,8 @@ public class CleansedEffect extends MobEffect {
 		entity.removeEffect(MobEffects.WITHER);
 		entity.removeEffect(MobEffects.WEAKNESS);
 		entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-		entity.removeEffect(ElixirsEffects.DECAY.get());
-		entity.removeEffect(ElixirsEffects.SMITED.get());
+		entity.removeEffect(ElixirsEffects.DECAY);
+		entity.removeEffect(ElixirsEffects.SMITED);
 		
 	}
 

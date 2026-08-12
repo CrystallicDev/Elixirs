@@ -1,6 +1,6 @@
 package com.natsu.elixirs.common.mobeffects.negative;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;

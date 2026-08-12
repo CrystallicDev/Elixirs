@@ -29,73 +29,78 @@ import com.natsu.elixirs.common.mobeffects.positive.RejuvenationEffect;
 import com.natsu.elixirs.common.mobeffects.positive.SlipperyEffect;
 import com.natsu.elixirs.common.mobeffects.positive.WrathEffect;
 
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
-import net.minecraftforge.registries.RegistryObject;
 
 public class ElixirsEffects {
 
-	public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Elixirs.MODID);
-	
 	// Positive
-	public static final RegistryObject<MobEffect> REJUVENATION = EFFECTS.register("rejuvenation", 
-			() -> new RejuvenationEffect());
-	public static final RegistryObject<MobEffect> CLEANSED = EFFECTS.register("cleansed", 
-			() -> new CleansedEffect());
-	public static final RegistryObject<MobEffect> WRATH = EFFECTS.register("wrath", 
-			() -> new WrathEffect());
-	public static final RegistryObject<MobEffect> ENDURANCE = EFFECTS.register("endurance", 
-			() -> new EnduranceEffect());
-	public static final RegistryObject<MobEffect> FRICTION = EFFECTS.register("friction", 
-			() -> new FrictionEffect());
-	public static final RegistryObject<MobEffect> SLIPPERY = EFFECTS.register("slippery", 
-			() -> new SlipperyEffect());
-	
-	//Negative
-	public static final RegistryObject<MobEffect> CRUMBLING = EFFECTS.register("crumbling", 
-			() -> new CrumblingEffect());
-	public static final RegistryObject<MobEffect> HYPERCHARGED = EFFECTS.register("hypercharged", 
-			() -> new HyperchargedEffect());
-	public static final RegistryObject<MobEffect> BURNED = EFFECTS.register("burned", 
-			() -> new BurnedEffect());
-	public static final RegistryObject<MobEffect> DEPTH_CRUSH = EFFECTS.register("depth_crush", 
-			() -> new DepthCrushEffect());
-	public static final RegistryObject<MobEffect> FROZEN = EFFECTS.register("frozen", 
-			() -> new FrozenEffect());
-	public static final RegistryObject<MobEffect> APHAGIA = EFFECTS.register("aphagia", 
-			() -> new AphagiaEffect());
-	public static final RegistryObject<MobEffect> FEAR = EFFECTS.register("fear", 
-			() -> new FearEffect());
-	public static final RegistryObject<MobEffect> DEAFENED = EFFECTS.register("deafened", 
-			() -> new DeafenedEffect());
-	public static final RegistryObject<MobEffect> BLEEDING = EFFECTS.register("bleeding", 
-			() -> new BleedingEffect());
-	public static final RegistryObject<MobEffect> SMITED = EFFECTS.register("smited", 
-			() -> new SmitedEffect());
-	public static final RegistryObject<MobEffect> DECAY = EFFECTS.register("decay", 
-			() -> new DecayEffect());
-	public static final RegistryObject<MobEffect> PARALYSIS = EFFECTS.register("paralysis",
-			() -> new ParalysisEffect());
-	public static final RegistryObject<MobEffect> FROZEN_SOLID = EFFECTS.register("frozen_solid", 
-			() -> new FrozenSolidEffect());
-	public static final RegistryObject<MobEffect> SYMBIOSIS = EFFECTS.register("symbiosis", 
-			() -> new SymbiosisEffect());
-	public static final RegistryObject<MobEffect> HEAVY = EFFECTS.register("heavy", 
-			() -> new HeavyEffect());
-	public static final RegistryObject<MobEffect> ATTRACTION = EFFECTS.register("attraction", 
-			() -> new AttractionEffect());
-	public static final RegistryObject<MobEffect> LEECH = EFFECTS.register("leech", 
-			() -> new LeechEffect());
-	public static final RegistryObject<MobEffect> UNSTABLE = EFFECTS.register("unstable", 
-			() -> new UnstableEffect());
-	public static final RegistryObject<MobEffect> RUSTED = EFFECTS.register("rusted", 
-			() -> new RustedEffect());
-	public static final RegistryObject<MobEffect> SHAKEN = EFFECTS.register("shaken", 
-			() -> new ShakenEffect());
-	public static final RegistryObject<MobEffect> CONFUSED = EFFECTS.register("confused", 
-			() -> new ConfusedEffect());
-	
+	public static MobEffect REJUVENATION;
+	public static MobEffect CLEANSED;
+	public static MobEffect WRATH;
+	public static MobEffect ENDURANCE;
+	public static MobEffect FRICTION;
+	public static MobEffect SLIPPERY;
+
+	// Negative
+	public static MobEffect CRUMBLING;
+	public static MobEffect HYPERCHARGED;
+	public static MobEffect BURNED;
+	public static MobEffect DEPTH_CRUSH;
+	public static MobEffect FROZEN;
+	public static MobEffect APHAGIA;
+	public static MobEffect FEAR;
+	public static MobEffect DEAFENED;
+	public static MobEffect BLEEDING;
+	public static MobEffect SMITED;
+	public static MobEffect DECAY;
+	public static MobEffect PARALYSIS;
+	public static MobEffect FROZEN_SOLID;
+	public static MobEffect SYMBIOSIS;
+	public static MobEffect HEAVY;
+	public static MobEffect ATTRACTION;
+	public static MobEffect LEECH;
+	public static MobEffect UNSTABLE;
+	public static MobEffect RUSTED;
+	public static MobEffect SHAKEN;
+	public static MobEffect CONFUSED;
+
+	public static void register() {
+		// Positive
+		REJUVENATION = reg("rejuvenation", new RejuvenationEffect());
+		CLEANSED = reg("cleansed", new CleansedEffect());
+		WRATH = reg("wrath", new WrathEffect());
+		ENDURANCE = reg("endurance", new EnduranceEffect());
+		FRICTION = reg("friction", new FrictionEffect());
+		SLIPPERY = reg("slippery", new SlipperyEffect());
+
+		// Negative
+		CRUMBLING = reg("crumbling", new CrumblingEffect());
+		HYPERCHARGED = reg("hypercharged", new HyperchargedEffect());
+		BURNED = reg("burned", new BurnedEffect());
+		DEPTH_CRUSH = reg("depth_crush", new DepthCrushEffect());
+		FROZEN = reg("frozen", new FrozenEffect());
+		APHAGIA = reg("aphagia", new AphagiaEffect());
+		FEAR = reg("fear", new FearEffect());
+		DEAFENED = reg("deafened", new DeafenedEffect());
+		BLEEDING = reg("bleeding", new BleedingEffect());
+		SMITED = reg("smited", new SmitedEffect());
+		DECAY = reg("decay", new DecayEffect());
+		PARALYSIS = reg("paralysis", new ParalysisEffect());
+		FROZEN_SOLID = reg("frozen_solid", new FrozenSolidEffect());
+		SYMBIOSIS = reg("symbiosis", new SymbiosisEffect());
+		HEAVY = reg("heavy", new HeavyEffect());
+		ATTRACTION = reg("attraction", new AttractionEffect());
+		LEECH = reg("leech", new LeechEffect());
+		UNSTABLE = reg("unstable", new UnstableEffect());
+		RUSTED = reg("rusted", new RustedEffect());
+		SHAKEN = reg("shaken", new ShakenEffect());
+		CONFUSED = reg("confused", new ConfusedEffect());
+	}
+
+	private static MobEffect reg(String name, MobEffect effect) {
+		return Registry.register(Registry.MOB_EFFECT, new ResourceLocation(Elixirs.MODID, name), effect);
+	}
+
 }

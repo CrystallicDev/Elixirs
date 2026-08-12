@@ -1,175 +1,83 @@
 plugins {
-    id 'eclipse'
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+	id 'maven-publish'
 }
 
-version = mod_version
-group = mod_group_id
-
-base {
-    archivesName = mod_id
-}
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-
-minecraft {
-    mappings channel: 'official', version: '1.18.2'
-    copyIdeResources = true
-
-    runs {
-        configureEach {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', mod_id
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        client {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        server {
-            property 'forge.enabledGameTestNamespaces', mod_id
-            args '--nogui'
-        }
-
-        gameTestServer {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        data {
-            workingDirectory project.file('run-data')
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+version = project.mod_version
+group = project.maven_group
 
 repositories {
-    maven { url 'https://jitpack.io' }
+	// Add repositories to retrieve artifacts from in here.
+	// You should only use this when depending on other mods because
+	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+	// for more information about repositories.
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.3")) {
-        jarJar.ranged(it, "[0.5.3,)")
-    }
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
 
-def refmapName = "mixins.elixirs.refmap.json"
-def refmapFile = file("${buildDir}/tmp/compileJava/${refmapName}")
+processResources {
+	def version = project.version
+	inputs.property "version", version
 
-afterEvaluate {
-    def tsrgFile = tasks.named('reobfJar').get().mappings.get().asFile
-    compileJava {
-        options.compilerArgs += [
-            "-AreobfTsrgFile=${tsrgFile.absolutePath}",
-            "-AoutRefMapFile=${refmapFile.absolutePath}",
-            "-AmappingTypes=tsrg"
-        ]
-    }
-}
-
-compileJava.doLast {
-    if (refmapFile.exists()) {
-        copy {
-            from refmapFile
-            into sourceSets.main.output.resourcesDir
-            rename { refmapName }
-        }
-    } else {
-        println "WARNING: refmap file was not generated at ${refmapFile.absolutePath}"
-    }
-}
-// ---------------------------------
-
-tasks.named('processResources', ProcessResources).configure {
-	dependsOn compileJava
-    var replaceProperties = [
-            minecraft_version      : minecraft_version,
-            minecraft_version_range: minecraft_version_range,
-            forge_version          : forge_version,
-            forge_version_range    : forge_version_range,
-            loader_version_range   : loader_version_range,
-            mod_id                 : mod_id,
-            mod_name               : mod_name,
-            mod_license            : mod_license,
-            mod_version            : mod_version,
-            mod_authors            : mod_authors,
-            mod_description        : mod_description,
-    ]
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
-    }
-}
-
-tasks.named('jar', Jar).configure {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE  // add this line
-
-    from(refmapFile) {
-        rename { refmapName }
-    }
-
-    manifest {
-        attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1',
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'MixinConfigs'            : 'mixins.elixirs.json',
-        ])
-    }
-
-    finalizedBy 'reobfJar'
-}
-
-// Le refmap doit aussi être présent dans le jar jarJar (-all), c'est lui qui est distribué
-tasks.named('jarJar').configure {
-    from(refmapFile) {
-        rename { refmapName }
-    }
-}
-
-// Archive chaque build (le jar distribuable -all) dans CustomMods/builds avec un nom
-// versionné (mc + mod version) pour ne pas écraser les builds des autres versions.
-tasks.register('archiveBuild', Copy) {
-    from "${buildDir}/libs/${mod_id}-${mod_version}-all.jar"
-    into "${projectDir}/../builds"
-    rename { "${mod_id}-${minecraft_version}-${mod_version}.jar" }
-}
-tasks.named('build').configure { finalizedBy 'archiveBuild' }
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+	it.options.release = 17
 }
+
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	def projectName = project.name
+	inputs.property "projectName", projectName
+
+	from("LICENSE") {
+		rename { "${it}_$projectName"}
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
+	}
+}
+
+// Archive le jar remappé (distribuable) dans CustomMods/builds avec un nom versionné + loader.
+tasks.register('archiveBuild', Copy) {
+    dependsOn 'remapJar'
+    from "${buildDir}/libs/${project.name}-${project.mod_version}.jar"
+    into "${projectDir}/../builds"
+    rename { "${project.name}-${project.minecraft_version}-${project.mod_loader}-${project.mod_version}.jar" }
+}
+tasks.named('build').configure { finalizedBy 'archiveBuild' }

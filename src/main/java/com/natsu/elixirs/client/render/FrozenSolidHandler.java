@@ -30,7 +30,7 @@ public class FrozenSolidHandler {
 	    @Override
 	    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float linbSwingAmount,
 	    		float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-	    	if (entity.hasEffect(ElixirsEffects.FROZEN_SOLID.get())) {
+	    	if (entity.hasEffect(ElixirsEffects.FROZEN_SOLID)) {
 	    		/*try {
 	    			poseStack.pushPose();
 		    		poseStack.scale(1.02f, 1.02f, 1.02f);		//Desperate attempt at avoiding Z fighting :(

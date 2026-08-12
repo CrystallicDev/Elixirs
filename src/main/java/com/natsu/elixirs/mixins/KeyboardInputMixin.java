@@ -18,7 +18,7 @@ public class KeyboardInputMixin extends Input {
     private void onTick(boolean isSneaking, CallbackInfo ci) {
         LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
         if (player == null) return;
-        if (!player.hasEffect(ElixirsEffects.CONFUSED.get())) return; 
+        if (!player.hasEffect(ElixirsEffects.CONFUSED)) return;
         float oldForward = this.forwardImpulse;
         this.forwardImpulse = -this.forwardImpulse;
         this.leftImpulse = -this.leftImpulse;

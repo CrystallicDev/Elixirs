@@ -24,7 +24,7 @@ public class BoatMixin {
         float baseFriction = cir.getReturnValue();
         if (!boat.getPassengers().isEmpty()) {
             if (boat.getPassengers().get(0) instanceof LivingEntity living) {
-                if (living.hasEffect(ElixirsEffects.SLIPPERY.get())) {
+                if (living.hasEffect(ElixirsEffects.SLIPPERY)) {
                     cir.setReturnValue(Math.max(0.98f, baseFriction));
                     return;
                 }
