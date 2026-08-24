@@ -1,6 +1,5 @@
 package com.natsu.elixirs.common.registry;
 
-import java.lang.reflect.Method;
 
 import com.natsu.elixirs.Elixirs;
 import com.natsu.elixirs.config.ElixirsConfig;
@@ -12,7 +11,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 
 public class ElixirsPotions {
@@ -134,20 +132,9 @@ public class ElixirsPotions {
 		addBrewingRecipe(base, Items.REDSTONE, longVariant);
 	}
 
-	// PotionBrewing.addMix est private static : pas d'API Fabric pour le brewing dans cette version,
-	// on passe par la réflexion pour réutiliser la mécanique vanilla (potion + réactif = potion).
-	private static Method addMixMethod;
-
+	// reuses vanilla's potion + reagent = potion mechanic through the PotionBrewing invoker mixin.
 	private static void addBrewingRecipe(Potion input, Item ingredient, Potion output) {
-		try {
-			if (addMixMethod == null) {
-				addMixMethod = PotionBrewing.class.getDeclaredMethod("addMix", Potion.class, Item.class, Potion.class);
-				addMixMethod.setAccessible(true);
-			}
-			addMixMethod.invoke(null, input, ingredient, output);
-		} catch (Exception e) {
-			Elixirs.LOGGER.error("Impossible d'enregistrer une recette de potion", e);
-		}
+		com.natsu.elixirs.mixins.PotionBrewingInvoker.elixirs$addMix(input, ingredient, output);
 	}
 
 }
